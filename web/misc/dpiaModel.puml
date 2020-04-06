@@ -1,0 +1,39 @@
+class ProcessingTask <<ProcessingTask>> {
+    high_risk: bool
+}
+
+class RiskCriteria {
+    profiling: bool
+    automatic_decision: bool
+    systematic_monitoring: bool
+    special_personal_data: bool
+    large_scale_processing: bool
+    data_merging: bool
+    incapacitated_persons_data: bool
+    new_technology: bool
+    biometric_procedure: bool
+    third_country_data_transfer: bool
+    rights_inhibition: bool
+}
+
+class DataProtectionImpactAssessment <<Artifact>> {
+    task_description: bool
+    purpose: bool
+    necessity_and_proportionality_assessment: bool
+    risks_to_rights : bool
+    risk_mitigation_measures: bool
+}
+
+skinparam class {
+  BackgroundColor<<Artifact>> PaleGreen
+  BorderColor<<Artifact>> SpringGreen
+  BackGroundColor<<NotRequired>> White
+  BorderColor<<NotRequired>> DarkGray
+  AttributeFontColor<<NotRequired>> LightGray
+  BorderColor<<MissingClass>> Red
+  BackgroundColor<<MissingArtifact>> PaleGreen
+  BorderColor<<MissingArtifact>> Red
+}
+
+ProcessingTask -- DataProtectionImpactAssessment : manifests >
+RiskCriteria -- ProcessingTask

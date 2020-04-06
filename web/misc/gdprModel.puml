@@ -1,0 +1,179 @@
+@startuml
+
+'Stereotyped classes
+class ProcessingTask <<ProcessingTask>> {
+  logged : bool
+}
+
+class FilingSystem <<FilingSystem>> {
+  data_storage: bool
+  storage_limited bool
+}
+
+class ProcessingSystem <<ProcessingSystem>> {
+  confidentiality: bool
+  integrity: bool
+  availability: bool
+  resilient: bool
+  pseudonymity: bool
+  data_minimization: bool
+  redundancies: bool
+  tested: bool
+}
+
+'class DPIA <<DPIA>> {
+'  required: ER bool
+'}
+
+'class DataBreach <<DataBreach>> {
+'  has_occurred: ER bool
+'}
+
+'ER and artifact to be refined
+'class ThirdCountryDataTransfer {
+  'is_required: ER bool
+'}
+
+class TechnicalMeasure <<TechnicalMeasure>> {
+  stereotype: GENERIC_STEREOTYPE
+  category: TECHNOLOGY_CATEGORY
+}
+
+class SpecialPurpose <<SpecialPurpose>> {
+ consent: CLASS consent
+ employment_purpose: bool
+ social_purpose: bool
+ vital_interest: bool
+ nonprofit_body: bool
+ public_from_subject: bool
+ legal_claim: bool
+ public_interest: bool
+ preventive_medicine: bool
+ occupational_medicine: bool
+ public_health: bool
+ archiving: bool
+ statistical_purposes: bool
+}
+
+class Purpose <<Purpose>> {
+  consent: CLASS consent
+  contract_performance: bool
+  controller_legal_obligation: bool
+  vital_interest_protection: bool
+  public_interest: bool
+  legitimate_interest: bool
+}
+
+class PersonalData <<PersonalData>> {
+  category: DATA_CATEGORY
+}
+
+class Consent <<Consent>> {
+}
+
+class Controller <<Controller>> {
+  processor: bool
+}
+
+class DataSubject <<DataSubject>> {
+  minor : false  
+}
+
+class DataHandler {
+}
+
+class Recipient <<Recipient>> {
+}
+
+class ThirdParty <<ThirdParty>> {
+}
+
+class Processor <<Processor>> {
+}
+
+'Artifact classes
+
+'class DPIAReport <<Artifact>> {
+' activity_description: bool
+'  necessity_assessment: bool
+'  proportionality_assessment: bool
+'  risk_mitigation: bool
+'}
+
+'class DataBreachNotification <<Artifact>> {
+'  description: bool
+'  DPO_info: bool
+'  consequences: bool
+'  measures_taken: bool
+'}
+
+class ProcessingLog <<ProcessingLog>> {
+  name: bool
+  contact_details: bool
+  personal_data_category: bool
+  data_storage_period: bool
+  technical_measures: bool
+  recipients: Array
+}
+  
+class ConsentAgreement <<ConsentAgreement>> {
+  clear_purpose: bool
+  unambiguous: bool
+  affirmative_action: bool
+  distinguishable: bool
+  specific: bool
+  withdrawable: bool
+  freely_given: bool
+}
+
+'Styles
+
+skinparam class {
+  BackgroundColor<<Artifact>> PaleGreen
+  BorderColor<<Artifact>> SpringGreen
+  BackGroundColor<<NotRequired>> White
+  BorderColor<<NotRequired>> DarkGray
+  AttributeFontColor<<NotRequired>> LightGray
+  BorderColor<<MissingClass>> Red
+  BackgroundColor<<MissingArtifact>> PaleGreen
+  BorderColor<<MissingArtifact>> Red
+}
+
+'Enumerations
+
+'enum DATA_CATEGORY {
+'  GENERAL
+'  BIOMETRIC
+'  GENETIC
+'  HEALTH
+'  ETHNIC_ORIGIN
+'  RACIAL_ORIGIN
+'  POLITICAL_AFFILIATION
+'  CRIMINAL_OFFENSE
+'  RELIGIOUS_BELIEF
+'  TRADE_UNION_MEMBERSHIP
+'  SEXUAL_ORIENTATION
+'}
+
+'Associations
+
+PersonalData -- Consent : requires >
+DataSubject -- PersonalData : provides >
+Controller -- ProcessingSystem : implements >
+Controller -- Processor
+Consent -- ConsentAgreement : manifests >
+'DataBreach -- DataBreachNotification : manifests >
+'DPIA -- DPIAReport : manifests >
+ProcessingTask -- ProcessingLog : manifests >
+PersonalData -- SpecialPurpose
+Purpose -- Consent
+Controller --|> DataHandler
+Processor --|> DataHandler
+Recipient --|> DataHandler
+ThirdParty --|> DataHandler
+DataHandler -- PersonalData : receives >
+ProcessingSystem -- ProcessingTask : performs >
+FilingSystem --|> ProcessingSystem
+TechnicalMeasure -- ProcessingSystem : secures >
+
+@enduml

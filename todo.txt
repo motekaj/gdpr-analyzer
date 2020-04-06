@@ -1,0 +1,3 @@
+- add links to articles to instantiated model
+- refactor models and controllers
+

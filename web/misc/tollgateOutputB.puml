@@ -1,0 +1,185 @@
+@startuml
+
+'Stereotyped classes
+class RequestPayment <<ProcessingTask>> {
+  logged : false
+}
+
+class FilingSystem <<NotRequired>> {
+  data_storage: bool
+  storage_limited bool
+}
+
+class ProcessingSystem <<MissingClass>> {
+  confidentiality: bool
+  integrity: bool
+  availability: bool
+  resilient: bool
+  pseudonymity: bool
+  data_minimization: bool
+  redundancies: bool
+  tested: bool
+}
+note bottom #red: class ProcessingSystem not instantiated
+
+'class DPIA <<DPIA>> {
+'  required: ER bool
+'}
+
+'class DataBreach <<DataBreach>> {
+'  has_occurred: ER bool
+'}
+
+'ER and artifact to be refined
+'class ThirdCountryDataTransfer {
+  'is_required: ER bool
+'}
+
+class TechnicalMeasure <<MissingClass>> {
+  stereotype: GENERIC_STEREOTYPE
+  category: TECHNOLOGY_CATEGORY
+}
+note bottom #red: class TechnicalMeasure not instantiated
+
+class SpecialPurpose <<NotRequired>> {
+ consent: CLASS consent
+ employment_purpose: bool
+ social_purpose: bool
+ vital_interest: bool
+ nonprofit_body: bool
+ public_from_subject: bool
+ legal_claim: bool
+ public_interest: bool
+ preventive_medicine: bool
+ occupational_medicine: bool
+ public_health: bool
+ archiving: bool
+ statistical_purposes: bool
+}
+
+class Purpose <<MissingClass>> {
+  consent: CLASS consent
+  contract_performance: bool
+  controller_legal_obligation: bool
+  vital_interest_protection: bool
+  public_interest: bool
+  legitimate_interest: bool
+}
+note bottom #red: class Purpose not instantiated
+
+class PaymentInfo <<PersonalData>> {
+  category: GENERAL
+}
+
+class Consent <<MissingClass>> {
+}
+note bottom #red: class Consent not instantiated
+
+class Tollgate <<Controller>> {
+  is_processor: true
+}
+
+class DataSubject <<DataSubject>> {
+  is_minor : false  
+}
+
+class DataHandler {
+}
+
+class Bank <<Recipient>> {
+}
+
+class ThirdParty <<NotRequired>> {
+}
+
+class Processor <<NotRequired>> {
+}
+
+'Artifact classes
+
+'class DPIAReport <<Artifact>> {
+' activity_description: bool
+'  necessity_assessment: bool
+'  proportionality_assessment: bool
+'  risk_mitigation: bool
+'}
+
+'class DataBreachNotification <<Artifact>> {
+'  description: bool
+'  DPO_info: bool
+'  consequences: bool
+'  measures_taken: bool
+'}
+
+class ProcessingLog <<MissingArtifact>> {
+  name: bool
+  contact_details: bool
+  personal_data_category: bool
+  data_storage_period: bool
+  technical_measures: bool
+  recipients: Array
+}
+note bottom #red: artifact ProcessingLog not instantiated
+  
+class ConsentAgreement <<MissingArtifact>> {
+  clear_purpose: bool
+  unambiguous: bool
+  affirmative_action: bool
+  distinguishable: bool
+  specific: bool
+  withdrawable: bool
+  freely_given: bool
+}
+note bottom #red: artifact ConsentAgreement not instantiated
+
+'Styles
+
+skinparam class {
+  BackgroundColor<<Artifact>> PaleGreen
+  BorderColor<<Artifact>> SpringGreen
+  BackGroundColor<<NotRequired>> White
+  BorderColor<<NotRequired>> DarkGray
+  AttributeFontColor<<NotRequired>> LightGray
+  BorderColor<<MissingClass>> Red
+  BackgroundColor<<MissingArtifact>> PaleGreen
+  BorderColor<<MissingArtifact>> Red
+}
+
+'Enumerations
+
+'enum DATA_CATEGORY {
+'  GENERAL
+'  BIOMETRIC
+'  GENETIC
+'  HEALTH
+'  ETHNIC_ORIGIN
+'  RACIAL_ORIGIN
+'  POLITICAL_AFFILIATION
+'  CRIMINAL_OFFENSE
+'  RELIGIOUS_BELIEF
+'  TRADE_UNION_MEMBERSHIP
+'  SEXUAL_ORIENTATION
+'}
+
+'Associations
+
+PaymentInfo -- Consent : requires >
+DataSubject -- PaymentInfo : provides >
+Tollgate -- ProcessingSystem : implements >
+Tollgate -- Processor
+Consent -- ConsentAgreement : manifests >
+'DataBreach -- DataBreachNotification : manifests >
+'DPIA -- DPIAReport : manifests >
+RequestPayment -- ProcessingLog : manifests >
+PaymentInfo -- SpecialPurpose
+Purpose -- Consent
+Tollgate --|> DataHandler
+Processor --|> DataHandler
+Bank --|> DataHandler
+ThirdParty --|> DataHandler
+DataHandler -- PaymentInfo : receives >
+ProcessingSystem -- RequestPayment : performs >
+FilingSystem --|> ProcessingSystem
+TechnicalMeasure -- ProcessingSystem : secures >
+
+@enduml
