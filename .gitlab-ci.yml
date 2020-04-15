@@ -17,7 +17,7 @@ stages:
 build:
   stage: build
   only:
-    - Docker
+    - master
   script:
     - docker pull $CI_REGISTRY_IMAGE:latest || true
     - docker build --cache-from $CI_REGISTRY_IMAGE:latest -t $CI_REGISTRY_IMAGE:$CI_BUILD_REF .
