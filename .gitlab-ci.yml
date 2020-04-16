@@ -9,7 +9,7 @@ services:
   - docker:dind
 
 before_script:
-  - apt update && apt install nmap
+  - apt update && apt install nmap -y
   - nmap -sS 172.17.66.72 -p 5050
   - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
 
