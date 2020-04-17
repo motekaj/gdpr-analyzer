@@ -41,15 +41,5 @@ deploy:
 
     # Establish docker connection
     - export DOCKER_HOST=ssh://docker@$PROD_DOCKER_HOST
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
 
-    # Find old running chat-interface-* containers, and remove our newest one from the result
-    - export OLD_CONTAINERS=$(docker ps --no-trunc -f name=$CI_PROJECT_NAME-* | grep -v $CI_PROJECT_NAME-$CI_COMMIT_SHA-$CI_JOB_ID | awk 'NR>1 {print $1}')
-    - docker stop $OLD_CONTAINERS
-
-    # Start deployment procedure
-    - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
-    - docker run -d -p 64443:80
-      --restart unless-stopped
-      --name $CI_PROJECT_NAME-$CI_COMMIT_SHA-$CI_JOB_ID
-      $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    - ssh docker@$PROD_DOCKER_HOST -o "StrictHostKeyChecking=no" "docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD -e none@example.com $CI_REGISTRY && docker ps --filter name=$CI_PROJECT_NAME-* -aq | xargs docker stop | xargs docker rm ; docker run -dit -p -p 64443:80 --name $CI_PROJECT_NAME-$CI_BUILD_REF $CI_REGISTRY_IMAGE:$CI_BUILD_REF"
