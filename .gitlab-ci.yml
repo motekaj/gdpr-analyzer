@@ -9,12 +9,11 @@ services:
   - docker:dind
 
 before_script:
-  - apk add nmap
-  - nmap -sS 172.17.66.72 -p 5050
   - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
 
 stages:
   - build
+  - deploy
 
 build:
   stage: build
@@ -25,3 +24,32 @@ build:
     - docker build --cache-from $CI_REGISTRY_IMAGE:latest -t $CI_REGISTRY_IMAGE:$CI_BUILD_REF .
     - docker tag $CI_REGISTRY_IMAGE:$CI_BUILD_REF $CI_REGISTRY_IMAGE:latest
     - docker push $CI_REGISTRY_IMAGE
+
+deploy:
+  stage: deploy
+  only:
+    - master
+  script:
+    # Handle SSH key management inside the container
+    - which ssh-agent || ( apk --update add openssh-client )
+    - which curl || ( apk --update add curl )
+    - eval $(ssh-agent -s)
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+    - ssh-keyscan $PROD_DOCKER_HOST >> ~/.ssh/known_hosts
+
+    # Establish docker connection
+    - export DOCKER_HOST=ssh://docker@$PROD_DOCKER_HOST
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+
+    # Find old running chat-interface-* containers, and remove our newest one from the result
+    - export OLD_CONTAINERS=$(docker ps --no-trunc -f name=$CI_PROJECT_NAME-* | grep -v $CI_PROJECT_NAME-$CI_COMMIT_SHA-$CI_JOB_ID | awk 'NR>1 {print $1}')
+    - docker stop $OLD_CONTAINERS
+
+    # Start deployment procedure
+    - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    - docker run -d -p 64443:80
+      --restart unless-stopped
+      --name $CI_PROJECT_NAME-$CI_COMMIT_SHA-$CI_JOB_ID
+      $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
