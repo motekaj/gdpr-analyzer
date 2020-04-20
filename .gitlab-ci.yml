@@ -42,4 +42,4 @@ deploy:
     # Establish docker connection
     - export DOCKER_HOST=ssh://docker@$PROD_DOCKER_HOST
 
-    - ssh docker@$PROD_DOCKER_HOST -o "StrictHostKeyChecking=no" "docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD -e none@example.com $CI_REGISTRY && docker ps --filter name=$CI_PROJECT_NAME-* -aq | xargs docker stop | xargs docker rm ; docker run -dit -p -p 64443:80 --name $CI_PROJECT_NAME-$CI_BUILD_REF $CI_REGISTRY_IMAGE:$CI_BUILD_REF"
+    - ssh docker@$PROD_DOCKER_HOST -o "StrictHostKeyChecking=no" "docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD -e none@example.com $CI_REGISTRY && docker ps --filter name=$CI_PROJECT_NAME-* -aq | xargs docker stop | xargs docker rm ; docker run -dit -p 64443:80 --name $CI_PROJECT_NAME-$CI_BUILD_REF $CI_REGISTRY_IMAGE:$CI_BUILD_REF"
