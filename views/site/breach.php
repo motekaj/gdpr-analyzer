@@ -138,7 +138,7 @@ $encode = encodep($output);
 	          <h6 class="m-0 font-weight-bold text-primary">Data Breach Process Diagram</h6>
 	        </div>
 	        <div class="card-body">
-	          <img style="width:100%;" src="/img/dpiaprocess.png">
+	          <img style="width:50%;" src="/img/databreachprocess.png">
 	        </div>
 	    </div>
     </div>
