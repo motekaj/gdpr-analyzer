@@ -79,11 +79,23 @@ class DataSubject <<DataSubject>> {
 class DataBreach {
 }
 
-class DataBreachNotification <<Artifact>> {
-	nature_of_breach: string
-	dpo_contact: string
-	consequences: string
-	measures_taken: string
+class SupervisoryAuthorityNotification <<Artifact>> {
+	nature_of_breach: bool
+	dpo_contact: bool
+	consequences: bool
+	measures_taken: bool
+  personal_data_category: bool
+  personal_data_number: bool
+  data_subject_category: bool
+  data_subject_number: bool
+  reasons_for_delay: bool
+}
+
+class DataSubjectNotification <<Artifact>> {
+  clear_explanation: bool
+  dpo_contact: bool
+  consequences: bool
+  measures_taken: bool
 }
 
 skinparam class {
@@ -99,7 +111,8 @@ skinparam class {
 
 DataSubject --|> DataBreach
 PersonalData --|> DataBreach
-DataBreach -- DataBreachNotification : manifests >');
+DataBreach -- SupervisoryAuthorityNotification : manifests >
+DataBreach -- DataSubjectNotification : manifests >');
 
 $encode = encodep($output);
 ?>
@@ -125,7 +138,7 @@ $encode = encodep($output);
 	          <h6 class="m-0 font-weight-bold text-primary">Data Breach Model</h6>
 	        </div>
 	        <div class="card-body">
-	          <img style="width:50%;" src=<?php echo "http://www.plantuml.com/plantuml/img/{$encode}"; ?>>
+	          <img style="width:80%;" src=<?php echo "http://www.plantuml.com/plantuml/img/{$encode}"; ?>>
 	        </div>
 	    </div>
     </div>
@@ -135,15 +148,27 @@ $encode = encodep($output);
   	<div class="col-lg-12 mb-4">
 	    <div class="card shadow mb-4">
 	        <div class="card-header py-3">
-	          <h6 class="m-0 font-weight-bold text-primary">Data Breach Process Diagram</h6>
+	          <h6 class="m-0 font-weight-bold text-primary">Supervisory Authority Notification Process Diagram</h6>
 	        </div>
 	        <div class="card-body">
-	          <img style="width:50%;" src="/img/databreachprocess.png">
+	          <img style="width:80%;" src="/img/supervisoryauthoritynotification.png">
 	        </div>
 	    </div>
     </div>
 </div>
 
+<div class="row">
+    <div class="col-lg-12 mb-4">
+      <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Data Subject Notification Process Diagram</h6>
+          </div>
+          <div class="card-body">
+            <img style="width:80%;" src="/img/datasubjectnotification.png">
+          </div>
+      </div>
+    </div>
+</div>
 
 
 
