@@ -266,6 +266,21 @@ $encode = encodep($output);
       </div>
 </div>
 
+<div class="row">
+  <div class="col-lg-12 mb-4">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">GDPR Compliance Process Diagram</h6>
+        </div>
+        <div class="card-body">
+          <img style="width:80%;" src="img/complianceprocess.png" ?>
+        </div>
+
+        </div>
+
+      </div>
+</div>
+
 
 
 
