@@ -159,6 +159,19 @@ class ConsentAgreement <<Artifact>> {
   freely_given: bool
 }
 
+enum DATA_CATEGORY {
+  general
+  biometric
+  health 
+  ethnic_origin
+  racial_origin
+  political_affiliation
+  criminal_offense
+  religion
+  trade_union_membership
+  sexual_orientation
+}
+
 
 skinparam class {
   BackgroundColor<<Artifact>> PaleGreen
