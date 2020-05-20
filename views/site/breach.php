@@ -119,13 +119,13 @@ $encode = encodep($output);
 
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-  <h1 class="h3 mb-0 text-gray-800">Evaluate Business Process</h1>
+  <h1 class="h3 mb-0 text-gray-800">Data Breach</h1>
 </div>
 <div class="row">
   	<div class="col-lg-6 mb-4">
 	    <div class="card shadow mb-4">
 	        <div class="card-header py-3">
-	          <h6 class="m-0 font-weight-bold text-primary">Data Protection Impact Assessment</h6>
+	          <h6 class="m-0 font-weight-bold text-primary">Description</h6>
 	        </div>
 	        <div class="card-body">
 	          <p>Description</p>
