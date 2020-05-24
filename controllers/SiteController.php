@@ -2,8 +2,8 @@
 
 namespace app\controllers;
 
-use app\models\BPMNDiagram;
 use Yii;
+use app\models\BPMNDiagram;
 use yii\web\Controller;
 use yii\web\UploadedFile;
 

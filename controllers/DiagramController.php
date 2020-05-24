@@ -3,14 +3,8 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\ContactForm;
-use app\models\LoginForm;
 use app\models\BPMNDiagram;
-use yii\filters\AccessControl;
-use yii\filters\VerbFilter;
 use yii\web\Controller;
-use yii\web\Response;
-use yii\web\UploadedFile;
 use yii\db\Connection;
 
 class DiagramController extends Controller
@@ -52,13 +46,4 @@ class DiagramController extends Controller
         return $this->redirect('all');
 	}
 
-	public function actionEvaluateOne() 
-	{
-
-	}
-
-	public function EditOne() 
-	{
-
-	}
 }

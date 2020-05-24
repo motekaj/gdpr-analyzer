@@ -339,7 +339,7 @@ $output = $controller .
 $encode = encodep($output);
 
 // echo '<pre>';
-// print_r(htmlentities($testOutput));
+// print_r(htmlentities($output));
 // echo '</pre>';
 // die();
 

@@ -133,7 +133,6 @@ class BPMNParser extends Component
         foreach ($inputs as $key => $value) {
             $name = $xml->xpath('//bpmn:*[@id=' . '"' . $value[0] . '"' . ']')[0]['name']->__toString();
 
-            // array_push($inputDataArtifacts, $value[0] . '__' . $name);
             array_push($inputDataArtifacts, $name);
         }
 
@@ -150,7 +149,6 @@ class BPMNParser extends Component
         foreach ($outputs as $key => $value) {
             $name = $xml->xpath('//bpmn:*[@id=' . '"' . $value[0] . '"' . ']')[0]['name']->__toString();
 
-            // array_push($outputDataArtifacts, $value[0] . '__' . $name);
             array_push($outputDataArtifacts, $name);
         }
 
