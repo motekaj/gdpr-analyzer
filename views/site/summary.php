@@ -64,13 +64,13 @@ function encode64($c) {
 
 
 
-$controller = "class " . $data['controller'] . " <<Controller>> { \n }";
-$dataSubject = "class " . $data['data_subject'] . " <<DataSubject>> { \n }";
+$controller = "class " . str_replace(' ', '', $data['controller']) . " <<Controller>> { \n }";
+$dataSubject = "class " . str_replace(' ', '', $data['data_subject']) . " <<DataSubject>> { \n }";
 $processor = "";
 $errors = "";
 
 if($data['processor']) { 
-	$processor = "class " . $data['processor'] . " <<Processor>> { \n }";
+	$processor = "class " . str_replace(' ', '', $data['processor']) . " <<Processor>> { \n }";
 } else { 
 	$processor = "class Processor <<NotRequired>>";
 };
@@ -78,7 +78,7 @@ if($data['processor']) {
 $recipient = "";
 
 if($data['recipient']) { 
-	$recipient = "class " . $data['recipient'] . " <<Recipient>> { \n }";
+	$recipient = "class " . str_replace(' ', '', $data['recipient']) . " <<Recipient>> { \n }";
 } else { 
 	$recipient = "class Recipient <<NotRequired>> { \n }";
 };
@@ -86,7 +86,7 @@ if($data['recipient']) {
 $thirdParty = "";
 
 if($data['third_party']) { 
-	$thirdParty = "class " . $data['third_party'] . " <<ThirdParty>> { \n }";
+	$thirdParty = "class " . str_replace(' ', '', $data['third_party']) . " <<ThirdParty>> { \n }";
 } else { 
 	$thirdParty = "class ThirdParty <<NotRequired>> { \n }";
 };
@@ -145,8 +145,8 @@ if (($data['data_category'] !== "general" && $data['special_purpose'] !== "gener
 	$consentAgreement = "class ConsentAgreement <<NotRequired>> {}";
 } else {
 	if($data['consent'] == "false") {
-		$errors = $errors . "\n note top of ConsentAgreement #red: Consent agreement is missing \n";
-		$errors = $errors . "\n note top of Consent #red: Data subject consent is missing \n";
+		$errors = $errors . "\n note top of ConsentAgreement #salmon: Consent agreement is missing [Art. 7]\n";
+		$errors = $errors . "\n note top of Consent #salmon: Data subject consent is missing [Art. 7] \n";
 		$consent = "class Consent <<MissingClass>> {}";
 		$consentAgreement = "class ConsentAgreement <<MissingArtifact>> {
 		  clear_purpose: 
@@ -176,7 +176,7 @@ if (($data['data_category'] !== "general" && $data['special_purpose'] !== "gener
 			$data["specific"] !== "true" ||
 			$data['withdrawable'] !== "true" ||
 			$data['freely_given'] !== "true") {
-			$errors = $errors . "\n note top of ConsentAgreement #red: Consent agreement has missing attributes \n";
+			$errors = $errors . "\n note top of ConsentAgreement #salmon: Consent agreement has missing attributes \n";
 		}
 	}
 }
@@ -193,7 +193,7 @@ if($data['data_storage'] !== "true") {
   		data_storage: true
   		storage_limited: " . $data['storage_limited'] . "\n }";
   	if($data['storage_limited'] !== "true") {
-  		$errors = $errors . "\n note top of FilingSystem #red: Filing System does not limit storage \n";
+  		$errors = $errors . "\n note top of FilingSystem #salmon: Filing System does not limit storage [Art. 5(e)] \n";
   	}
 }
 
@@ -204,7 +204,7 @@ if($data['technical_measures'] == NULL) {
   		technologies:
 	}";
 
-	$errors = $errors . "\n note top of TechnicalMeasures #red: No technical measures present \n";
+	$errors = $errors . "\n note top of TechnicalMeasures #salmon: No technical measures present [Art. 25] \n";
 } else {
 	$technicalMeasures = "class TechnicalMeasures {
   		technologies: " . $data['technical_measures'] . "\n }";
@@ -212,14 +212,14 @@ if($data['technical_measures'] == NULL) {
 
 
 $processingSystem = "class ProcessingSystem { \n" .
-		  "confidentiality: " . $data['confidentiality'] . "\n" . 
-		  "integrity: " . $data['integrity'] . "\n" . 
-		  "availability: " . $data['availability'] . "\n" . 
-		  "resilient: " . $data['resilient'] . "\n" . 
-		  "pseudonimity: " . $data['pseudonimity'] . "\n" . 
-		  "data_minimization: " . $data['data_minimization'] . "\n" . 
-		  "redundancies: " . $data['redundancies'] . "\n" . 
-		  "tested: " . $data['tested'] . "\n" . 
+		  "confidentiality: false" . $data['confidentiality'] . "\n" . 
+		  "integrity: false" . $data['integrity'] . "\n" . 
+		  "availability: false" . $data['availability'] . "\n" . 
+		  "resilient: false" . $data['resilient'] . "\n" . 
+		  "pseudonimity: false" . $data['pseudonimity'] . "\n" . 
+		  "data_minimization: false" . $data['data_minimization'] . "\n" . 
+		  "redundancies: false" . $data['redundancies'] . "\n" . 
+		  "tested: false" . $data['tested'] . "\n" . 
 		"}";
 
 if($data['confidentiality'] !== "true" ||
@@ -230,7 +230,7 @@ if($data['confidentiality'] !== "true" ||
 	$data["data_minimization"] !== "true" ||
 	$data['redundancies'] !== "true" ||
 	$data['tested'] !== "true") {
-	$errors = $errors . "\n note top of ProcessingSystem #red: Processing system has missing attributes \n";
+	$errors = $errors . "\n note top of ProcessingSystem #salmon: Processing system has missing attributes [Art. 32]\n";
 }
 
 $processingTask = "";
@@ -239,7 +239,7 @@ if ($data['processing_log'] !== "true") {
 	$processingTask = "class " . $data['processing_task'] . " <<ProcessingTask>> {
 		logged: false
 	}";
-	$errors = $errors . "\n note top of " . $data['processing_task'] . " #red: Processing task is not being logged \n";
+	$errors = $errors . "\n note top of " . $data['processing_task'] . " #salmon: Processing task is not being recorded [Art. 30] \n";
 } else {
 	$processingTask = "class " . $data['processing_task'] . " <<ProcessingTask>> {
 		logged: true
@@ -258,7 +258,7 @@ if ($data['processing_log'] !== "true") {
 		recipients:
 	}";
 
-	$errors = $errors . "\n note top of ProcessingLog #red: Processing log is missing \n";
+	$errors = $errors . "\n note top of ProcessingLog #salmon: Record of processing is missing [Art. 30] \n";
 } else {
 	$processingLog = "class ProcessingLog <<Artifact>> { \n" .
 		  "name: " . $data['name'] . "\n" . 
@@ -275,7 +275,7 @@ if ($data['processing_log'] !== "true") {
 		$data['data_storage_period'] !== "true" ||
 		$data["technical_safeguards"] !== "true" ||
 		$data["recipients"] !== "true") {
-	$errors = $errors . "\n note top of ProcessingLog #red: Processing log has missing attributes \n";
+	$errors = $errors . "\n note top of ProcessingLog #salmon: Record of processing has missing attributes [Art. 30] \n";
 }
 }
 
@@ -297,11 +297,11 @@ FilingSystem --|> ProcessingSystem
 TechnicalMeasures -- ProcessingSystem : secures >";
 
 
-$associations = str_replace("Controller", $data['controller'], $associations);
-$associations = str_replace("DataSubject", $data['data_subject'], $associations);
-if ($data['processor']) { $associations = str_replace("Processor", $data['processor'], $associations); };
-if ($data['recipient']) { $associations = str_replace("Recipient", $data['recipient'], $associations); };
-if ($data['third_party']) { $associations = str_replace("ThirdParty", $data['third_party'], $associations); };
+$associations = str_replace("Controller", str_replace(' ', '', $data['controller']), $associations);
+$associations = str_replace("DataSubject", str_replace(' ', '', $data['data_subject']), $associations);
+if ($data['processor']) { $associations = str_replace("Processor", str_replace(' ', '', $data['processor']), $associations); };
+if ($data['recipient']) { $associations = str_replace("Recipient", str_replace(' ', '', $data['recipient']), $associations); };
+if ($data['third_party']) { $associations = str_replace("ThirdParty", str_replace(' ', '', $data['third_party']), $associations); };
 if ($data['personal_data']) { $associations = str_replace("PersonalData", $data['personal_data'], $associations); };
 if ($data['processing_task']) { $associations = str_replace("ProcessingTask", $data['processing_task'], $associations); };
 
