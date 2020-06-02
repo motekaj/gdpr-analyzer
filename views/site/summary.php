@@ -212,14 +212,14 @@ if($data['technical_measures'] == NULL) {
 
 
 $processingSystem = "class ProcessingSystem { \n" .
-		  "confidentiality: false" . $data['confidentiality'] . "\n" . 
-		  "integrity: false" . $data['integrity'] . "\n" . 
-		  "availability: false" . $data['availability'] . "\n" . 
-		  "resilient: false" . $data['resilient'] . "\n" . 
-		  "pseudonimity: false" . $data['pseudonimity'] . "\n" . 
-		  "data_minimization: false" . $data['data_minimization'] . "\n" . 
-		  "redundancies: false" . $data['redundancies'] . "\n" . 
-		  "tested: false" . $data['tested'] . "\n" . 
+		  "confidentiality:" . $data['confidentiality'] . "\n" . 
+		  "integrity:" . $data['integrity'] . "\n" . 
+		  "availability:" . $data['availability'] . "\n" . 
+		  "resilient:" . $data['resilient'] . "\n" . 
+		  "pseudonimity:" . $data['pseudonimity'] . "\n" . 
+		  "data_minimization:" . $data['data_minimization'] . "\n" . 
+		  "redundancies:" . $data['redundancies'] . "\n" . 
+		  "tested:" . $data['tested'] . "\n" . 
 		"}";
 
 if($data['confidentiality'] !== "true" ||
