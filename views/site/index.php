@@ -188,7 +188,7 @@ skinparam class {
 PersonalData -- Consent : requires >
 DataSubject -- PersonalData : provides >
 Controller -- ProcessingSystem : implements >
-Controller -- Processor
+Controller -- Processor : authorizes >
 Consent -- ConsentAgreement : manifests >
 ProcessingTask -- ProcessingLog : manifests >
 PersonalData -- SpecialPurpose
