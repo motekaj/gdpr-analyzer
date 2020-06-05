@@ -104,7 +104,7 @@ $specialPurpose = "";
 
 if($data['data_category'] == "general") {
 	$specialPurpose = "class SpecialPurpose <<NotRequired>> {
-	general: false
+	unspecified: false
 	employment_purpose: false
 	social_purpose: false
 	vital_interest: false
@@ -124,9 +124,9 @@ if($data['data_category'] == "general") {
 
 $purpose = "";
 
-if($data['purpose'] == "general") {
+if($data['purpose'] == "unspecified") {
 	$purpose = "class Purpose {
-	  general: true
+	  unspecified: true
 	  contract_performance: false
 	  controller_legal_obligation: false
 	  vital_interest_protection: false
@@ -140,7 +140,7 @@ if($data['purpose'] == "general") {
 $consent = "";
 $consentAgreement = "";
 
-if (($data['data_category'] !== "general" && $data['special_purpose'] !== "general") || ($data['purpose'] !== "general")) {
+if (($data['data_category'] !== "unspecified" && $data['special_purpose'] !== "unspecified") || ($data['purpose'] !== "unspecified")) {
 	$consent = "class Consent <<NotRequired>> {}";
 	$consentAgreement = "class ConsentAgreement <<NotRequired>> {}";
 } else {

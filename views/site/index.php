@@ -90,7 +90,7 @@ class TechnicalMeasures {
 }
 
 class SpecialPurpose {
- general: bool
+ unspecified: bool
  employment_purpose: bool
  social_purpose: bool
  vital_interest: bool
@@ -106,7 +106,7 @@ class SpecialPurpose {
 }
 
 class Purpose {
-  general: bool
+  unspecified: bool
   contract_performance: bool
   controller_legal_obligation: bool
   vital_interest_protection: bool

@@ -39,7 +39,7 @@ $this->registerJsFile(
         <div class="form-group" id="purposeContainer">
           <label for="purpose" href="#" >Select the purpose that the personal data is being collected for:</label>
           <select class="form-control" id="purpose" name="purpose">
-            <option value="general">General</option>
+            <option value="unspecified">Unspecified</option>
             <option value="contract_performance">Contract performance</option>
             <option value="controller_legal_obligation">Controller legal obligation</option>
             <option value="vital_interest_protection">Vital interest protection</option>
@@ -51,7 +51,7 @@ $this->registerJsFile(
         <div class="form-group" id="specialPurposeContainer">
           <label for="specialPurpose" href="#" >This is a special category of personal data. Select the purpose that the personal data is being collected for:</label>
           <select class="form-control" id="specialPurpose" name="special_purpose">
-            <option value="general">General</option>
+            <option value="unspecified">Unspecified</option>
             <option value="employment_purpose">Employment Purpose</option>
             <option value="social_purpose">Social Purpose</option>
             <option value="vital_interest">Vital Interest</option>
