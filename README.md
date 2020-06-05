@@ -2,7 +2,7 @@
 
 Live demo available [here](https://dpotool.cs.ut.ee)
 
-Persistent folder for redployment: `/web/uploads`
+Persistent folder for redployment:  `/web/uploads`
 
 For local setup:
 
