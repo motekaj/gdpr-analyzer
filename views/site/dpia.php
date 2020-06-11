@@ -78,7 +78,6 @@ class RiskCriteria {
     data_merging: bool
     incapacitated_persons_data: bool
     new_technology: bool
-    biometric_procedure: bool
     third_country_data_transfer: bool
     rights_inhibition: bool
 }
