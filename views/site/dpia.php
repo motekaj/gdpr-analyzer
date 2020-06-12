@@ -118,7 +118,8 @@ $encode = encodep($output);
 	          <h6 class="m-0 font-weight-bold text-primary">Description</h6>
 	        </div>
 	        <div class="card-body">
-	          <p>Description</p>
+	          <p>The Data Protection Impact Assesment (DPIA) is necessary for any ongoing/planned processing tasks in your business process if it falls under a high risk category. The DPIA model to the right captures the risk criteria that determine whether the processing task falls under a high risk category according to the <a target="_blank" href="https://ec.europa.eu/newsroom/article29/item-detail.cfm?item_id=611236">Article 29 Working Party Guidelines for DPIA</a>. Generally, multiple criteria need to be applicable for a task to be considered high risk.</p>
+            <p>The DPIA process model below describes the process to be used to determine whether a DPIA is necessary and how to apply the DPIA model. If a DPIA is deemed to be necessary, the report must be prepared fulfilling all the criteria in the modeled artifact.</p>
 	        </div>
 	    </div>
   	</div>

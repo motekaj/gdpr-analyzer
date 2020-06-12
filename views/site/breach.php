@@ -128,7 +128,9 @@ $encode = encodep($output);
 	          <h6 class="m-0 font-weight-bold text-primary">Description</h6>
 	        </div>
 	        <div class="card-body">
-	          <p>Description</p>
+	          <p>In the event of a data breach, the GDPR mandates the preparation and dispersal of notifications to the supervisory authority and the data subject under certain conditions. The notification process diagrams below describe these conditions.</p>
+            <p>In the case of the supervisory authority notification, the breach must represent a significant risk to the rights and freedoms of the data subjects. The notification must fulfill the attributes in the modeled artifact in the data breach model. If it has been more than 72 hours since the breach, the notification must contain an explanation providing the reasons for the notification delay as well.</p>
+            <p>In the case of the notification to the data subject, the notification must be sent if the implemented technical measures cannot protect the breached personal data and represent a high risk to the rights and freedoms of the data subject. The supervisory authority may be consulted on whether the notification must be prepared as well. If the notification is deemed necessray, it must fulfill the attributes of the modeled artifact in the data breach model.</p>
 	        </div>
 	    </div>
   	</div>
