@@ -69,24 +69,28 @@ $this->registerJsFile(
         <br>
 
         <div class="form-group">
-            <label for="processingLog" href="#" >Is there evidence of the processing task being logged?</label>
+            <label for="processingLog" href="#" >Is a record of processing maintained?</label>
         	<select class="form-control" id="processingLog" name="processing_log">
 		        <option value="">No</option>
 		        <option value="true">Yes</option>
         	</select>
         </div>
 		<div class="form-check" id="logAttributes">
-		<p>Check whether the following attributes are recorded in the log:</p>
+		<p>Check whether the record of processing has the following attributes:</p>
 			<input type="checkbox" class="form-check-input" id="Name" name="name" value="true">
 			<label class="form-check-label" for="Name">Name</label><br>
+      <input type="checkbox" class="form-check-input" id="Purpose" name="purpose" value="true">
+      <label class="form-check-label" for="Purpose">Purpose</label><br>
 			<input type="checkbox" class="form-check-input" id="Contact Details" name="contact_details" value="true">
 			<label class="form-check-label" for="Contact Details">Contact Details</label><br>
 			<input type="checkbox" class="form-check-input" id="Personal Data Category" name="personal_data_category" value="true">
 			<label class="form-check-label" for="Personal Data Category">Personal Data Category</label><br>
 			<input type="checkbox" class="form-check-input" id="Data Storage Period" name="data_storage_period" value="true">
 			<label class="form-check-label" for="Data Storage Period">Data Storage Period</label><br>
-			<input type="checkbox" class="form-check-input" id="Technical Safeguards" name="technical_safeguards" value="true">
-			<label class="form-check-label" for="Technical Safeguards">Technical Safeguards</label><br>
+			<input type="checkbox" class="form-check-input" id="Security Measures" name="security_measures" value="true">
+			<label class="form-check-label" for="Security Measures">Security Measures</label><br>
+      <input type="checkbox" class="form-check-input" id="Third Countries Transfer" name="third_countries_transfer" value="true">
+      <label class="form-check-label" for="Third Countries Transfer">Third Countries Transfer</label><br>
 			<input type="checkbox" class="form-check-input" id="Recipients" name="recipients" value="true">
 			<label class="form-check-label" for="Recipients">Recipients</label><br>
 		</div>

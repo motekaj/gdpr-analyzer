@@ -1,20 +1,20 @@
 var dataCategory = $('#dataCategory');
 var consent = $('#consent');
 var consentAgreement = $('#consentAgreement');
-var purpose = $('#purpose');
-var specialPurpose = $('#specialPurpose');
+var legalGround = $('#legalGround');
+var legalGroundSpecialCategory = $('#legalGroundSpecialCategory');
 
-$('#specialPurposeContainer').hide();
+$('#legalGroundSpecialCategoryContainer').hide();
 $('#consentNotRequired').hide();
 consentAgreement.hide();
 
 dataCategory.change(function() {
     if ($(this).val() == 'general') {
-        $('#specialPurposeContainer').hide();
-        $('#purposeContainer').show();
+        $('#legalGroundSpecialCategoryContainer').hide();
+        $('#legalGroundContainer').show();
     } else {
-        $('#specialPurposeContainer').show();
-        $('#purposeContainer').hide();
+        $('#legalGroundSpecialCategoryContainer').show();
+        $('#legalGroundContainer').hide();
     }
 });
 
@@ -26,22 +26,22 @@ consent.change(function() {
     }
 });
 
-purpose.change(function() {
-    if ($(this).val() !== 'general') {
-        $('#consentNotRequired').show();
-        $('#consentWrapper').hide();
-    } else {
+legalGround.change(function() {
+    if ($(this).val() == 'unspecified' || $(this).val() == 'consent') {
         $('#consentNotRequired').hide();
         $('#consentWrapper').show();
+    } else {
+        $('#consentNotRequired').show();
+        $('#consentWrapper').hide();
     }
 });
 
-specialPurpose.change(function() {
-    if ($(this).val() !== 'general') {
-        $('#consentNotRequired').show();
-        $('#consentWrapper').hide();
-    } else {
+legalGroundSpecialCategory.change(function() {
+    if ($(this).val() == 'unspecified' || $(this).val() == 'consent') {
         $('#consentNotRequired').hide();
         $('#consentWrapper').show();
+    } else {
+        $('#consentNotRequired').show();
+        $('#consentWrapper').hide();
     }
 });

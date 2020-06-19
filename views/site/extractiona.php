@@ -41,7 +41,7 @@ use yii\bootstrap\Dropdown;
             </select>
           </div>
           <div class="form-group">
-            <label for="processorx" data-toggle="dropdown" class=""><strong>Processor (May be the same as Controller)</strong></label>
+            <label for="processorx" data-toggle="dropdown" class=""><strong>Processor</strong></label>
                <select class="form-control" id="processorx" name="processor">
                 <option value="None">None</option>
                 <?php

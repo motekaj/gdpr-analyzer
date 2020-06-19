@@ -100,11 +100,12 @@ if($data['personal_data']) {
 	$personalData = "class PersonalData <<MissingClass>> { \n }";
 };
 
-$specialPurpose = "";
+$legalGroundSpecialCategory = "";
 
 if($data['data_category'] == "general") {
-	$specialPurpose = "class SpecialPurpose <<NotRequired>> {
+	$legalGroundSpecialCategory = "class LegalGroundSpecialCategory <<NotRequired>> {
 	unspecified: false
+	consent: false
 	employment_purpose: false
 	social_purpose: false
 	vital_interest: false
@@ -119,14 +120,15 @@ if($data['data_category'] == "general") {
 	statistical_purposes: false
 	}";
 } else {
-	$specialPurpose = "class SpecialPurpose { \n" . $data['special_purpose'] . ": true \n }";
+	$legalGroundSpecialCategory = "class LegalGroundSpecialCategory { \n" . $data['legal_ground_special_category'] . ": true \n }";
 };
 
-$purpose = "";
+$legalGround = "";
 
-if($data['purpose'] == "unspecified") {
-	$purpose = "class Purpose {
+if($data['legal_ground'] == "unspecified") {
+	$legalGround = "class LegalGround {
 	  unspecified: true
+	  consent: false
 	  contract_performance: false
 	  controller_legal_obligation: false
 	  vital_interest_protection: false
@@ -134,21 +136,22 @@ if($data['purpose'] == "unspecified") {
 	  legitimate_interest: false
 	}";
 } else {
-	$purpose = "class Purpose { \n" . $data['purpose'] . ": true \n }";
+	$legalGround = "class LegalGround { \n" . $data['legal_ground'] . ": true \n }";
 };
 
 $consent = "";
-$consentAgreement = "";
 
-if (($data['data_category'] !== "unspecified" && $data['special_purpose'] !== "unspecified") || ($data['purpose'] !== "unspecified")) {
+if (($data['data_category'] !== "general" && $data['legal_ground_special_category'] !== "unspecified") || 
+	($data['legal_ground'] == "contract_performance" || 
+	$data['legal_ground'] == "controller_legal_obligation" ||
+	$data['legal_ground'] == "vital_interest_protection" ||
+	$data['legal_ground'] == "public_interest" ||
+	$data['legal_ground'] == "legitimate_interest")) {
 	$consent = "class Consent <<NotRequired>> {}";
-	$consentAgreement = "class ConsentAgreement <<NotRequired>> {}";
 } else {
 	if($data['consent'] == "false") {
-		$errors = $errors . "\n note top of ConsentAgreement #salmon: Consent agreement is missing [Art. 7]\n";
-		$errors = $errors . "\n note top of Consent #salmon: Data subject consent is missing [Art. 7] \n";
-		$consent = "class Consent <<MissingClass>> {}";
-		$consentAgreement = "class ConsentAgreement <<MissingArtifact>> {
+		$errors = $errors . "\n note top of Consent #salmon: Consent is missing [Art. 7]\n";
+		$consent = "class Consent <<MissingArtifact>> {
 		  clear_purpose: 
 		  unambiguous: 
 		  affirmative_action: 
@@ -158,8 +161,7 @@ if (($data['data_category'] !== "unspecified" && $data['special_purpose'] !== "u
 		  freely_given: 
 		}";
 	} else {
-		$consent = "class Consent {}";
-		$consentAgreement = "class ConsentAgreement <<Artifact>> { \n" .
+		$consent = "class Consent <<Artifact>> { \n" .
 		  "clear_purpose: " . $data['clear_purpose'] . "\n" . 
 		  "unambiguous: " . $data['unambiguous'] . "\n" . 
 		  "affirmative_action: " . $data['affirmative_action'] . "\n" . 
@@ -176,7 +178,7 @@ if (($data['data_category'] !== "unspecified" && $data['special_purpose'] !== "u
 			$data["specific"] !== "true" ||
 			$data['withdrawable'] !== "true" ||
 			$data['freely_given'] !== "true") {
-			$errors = $errors . "\n note top of ConsentAgreement #salmon: Consent agreement has missing attributes \n";
+			$errors = $errors . "\n note top of Consent #salmon: Consent has missing attributes [Art. 7]\n";
 		}
 	}
 }
@@ -237,56 +239,60 @@ $processingTask = "";
 
 if ($data['processing_log'] !== "true") {
 	$processingTask = "class " . $data['processing_task'] . " <<ProcessingTask>> {
-		logged: false
+		recorded: false
 	}";
 	$errors = $errors . "\n note top of " . $data['processing_task'] . " #salmon: Processing task is not being recorded [Art. 30] \n";
 } else {
 	$processingTask = "class " . $data['processing_task'] . " <<ProcessingTask>> {
-		logged: true
+		recorded: true
 	}";
 };
 
 $processingLog = "";
 
 if ($data['processing_log'] !== "true") {
-	$processingLog = "class ProcessingLog <<MissingArtifact>> {
+	$processingLog = "class RecordOfProcessing <<MissingArtifact>> {
 		name: 
+		purpose:
 		contact_details:
 		personal_data_category:
 		data_storage_period:
-		technical_safeguards:
+		security_measures:
 		recipients:
 	}";
 
-	$errors = $errors . "\n note top of ProcessingLog #salmon: Record of processing is missing [Art. 30] \n";
+	$errors = $errors . "\n note top of RecordOfProcessing #salmon: Record of processing is missing [Art. 30] \n";
 } else {
-	$processingLog = "class ProcessingLog <<Artifact>> { \n" .
+	$processingLog = "class RecordOfProcessing <<Artifact>> { \n" .
 		  "name: " . $data['name'] . "\n" . 
+		  "purpose: " . $data['purpose'] . "\n" . 
 		  "contact_details: " . $data['contact_details'] . "\n" . 
 		  "personal_data_category: " . $data['personal_data_category'] . "\n" . 
 		  "data_storage_period: " . $data['data_storage_period'] . "\n" . 
-		  "technical_safeguards: " . $data['technical_safeguards'] . "\n" . 
+		  "security_measures: " . $data['security_measures'] . "\n" . 
+		  "third_countries_transfer: " . $data['third_countries_transfer'] . "\n" . 
 		  "recipients: " . $data['recipients'] . "\n" . 
 		"}";
 
 	if($data['name'] !== "true" ||
+		$data['purpose'] !== "true" ||
 		$data['contact_details'] !== "true" ||
 		$data['personal_data_category'] !== "true" ||
 		$data['data_storage_period'] !== "true" ||
-		$data["technical_safeguards"] !== "true" ||
+		$data["security_measures"] !== "true" ||
+		$data["third_countries_transfer"] !== "true" ||
 		$data["recipients"] !== "true") {
-	$errors = $errors . "\n note top of ProcessingLog #salmon: Record of processing has missing attributes [Art. 30] \n";
+	$errors = $errors . "\n note top of RecordOfProcessing #salmon: Record of processing has missing attributes [Art. 30] \n";
 }
 }
 
-$associations = "PersonalData -- Consent : requires >
+$associations = "PersonalData -- Consent : manifests >
 DataSubject -- PersonalData : provides >
 Controller -- ProcessingSystem : implements >
 Controller -- Processor : authorizes >
-Consent -- ConsentAgreement : manifests >
-ProcessingTask -- ProcessingLog : manifests >
-PersonalData -- SpecialPurpose
-Purpose -- Consent
+ProcessingTask -- RecordOfProcessing : manifests >
+PersonalData -- LegalGroundSpecialCategory : requires >
+PersonalData -- LegalGround : requires >
 Controller --|> DataHandler
 Processor --|> DataHandler
 Recipient --|> DataHandler
@@ -323,10 +329,9 @@ $output = $controller .
 "\n" . $recipient  . 
 "\n" . $thirdParty  . 
 "\n" . $personalData  . 
-"\n" . $specialPurpose  . 
-"\n" . $purpose  . 
-"\n" . $consent  . 
-"\n" . $consentAgreement  . 
+"\n" . $legalGroundSpecialCategory  . 
+"\n" . $legalGround  . 
+"\n" . $consent  .  
 "\n" . $filingSystem  . 
 "\n" . $technicalMeasures  . 
 "\n" . $processingSystem  . 

@@ -166,8 +166,8 @@ class SiteController extends Controller
 
         $params                    = [];
         $params[':dataCategory']   = $formd['data_category'];
-        $params[':purpose']        = $formd['purpose'];
-        $params[':specialPurpose'] = $formd['special_purpose'];
+        $params[':legalGround']        = $formd['legal_ground'];
+        $params[':legalGroundSpecialCategory'] = $formd['legal_ground_special_category'];
         $params[':consent']        = $formd['consent'];
 
         if (array_key_exists('clear_purpose', $formd)) {$params[':clearPurpose'] = $formd['clear_purpose'];} else { $params[':clearPurpose'] = null;};
@@ -181,7 +181,7 @@ class SiteController extends Controller
         $params[':diagramID'] = $diagramID;
 
         $connection = Yii::$app->db;
-        $connection->createCommand('UPDATE model_info SET data_category=:dataCategory, purpose=:purpose, special_purpose=:specialPurpose, consent=:consent, clear_purpose=:clearPurpose, unambiguous=:unambiguous, affirmative_action=:affirmativeAction, distinguishable=:distinguishable, `specific`=:specific, withdrawable=:withdrawable, freely_given=:freelyGiven WHERE model_ref=:diagramID')
+        $connection->createCommand('UPDATE model_info SET data_category=:dataCategory, legal_ground=:legalGround, legal_ground_special_category=:legalGroundSpecialCategory, consent=:consent, clear_purpose=:clearPurpose, unambiguous=:unambiguous, affirmative_action=:affirmativeAction, distinguishable=:distinguishable, `specific`=:specific, withdrawable=:withdrawable, freely_given=:freelyGiven WHERE model_ref=:diagramID')
             ->bindValues($params)
             ->execute();
 
@@ -211,15 +211,17 @@ class SiteController extends Controller
         if (array_key_exists('technical_measures', $forme)) {$params[':technicalMeasures'] = implode(',', $forme['technical_measures']);if ($params[':technicalMeasures'] == "None") {$params[':technicalMeasures'] = null;}} else { $params[':technicalMeasures'] = null;};
         if (array_key_exists('processing_log', $forme)) {$params[':processingLog'] = $forme['processing_log'];} else { $params[':processingLog'] = null;};
         if (array_key_exists('name', $forme)) {$params[':name'] = $forme['name'];} else { $params[':name'] = null;};
+        if (array_key_exists('purpose', $forme)) {$params[':purpose'] = $forme['purpose'];} else { $params[':purpose'] = null;};
         if (array_key_exists('contact_details', $forme)) {$params[':contactDetails'] = $forme['contact_details'];} else { $params[':contactDetails'] = null;};
         if (array_key_exists('personal_data_category', $forme)) {$params[':personalDataCategory'] = $forme['personal_data_category'];} else { $params[':personalDataCategory'] = null;};
         if (array_key_exists('data_storage_period', $forme)) {$params[':dataStoragePeriod'] = $forme['data_storage_period'];} else { $params[':dataStoragePeriod'] = null;};
-        if (array_key_exists('technical_safeguards', $forme)) {$params[':technicalSafeguards'] = $forme['technical_safeguards'];} else { $params[':technicalSafeguards'] = null;};
+        if (array_key_exists('security_measures', $forme)) {$params[':securityMeasures'] = $forme['security_measures'];} else { $params[':securityMeasures'] = null;};
+        if (array_key_exists('third_countries_transfer', $forme)) {$params[':thirdCountriesTransfer'] = $forme['third_countries_transfer'];} else { $params[':thirdCountriesTransfer'] = null;};
         if (array_key_exists('recipients', $forme)) {$params[':recipients'] = $forme['recipients'];} else { $params[':recipients'] = null;};
         $params[':diagramID'] = $diagramID;
 
         $connection = Yii::$app->db;
-        $connection->createCommand('UPDATE model_info SET confidentiality=:confidentiality, integrity=:integrity, availability=:availability, resilient=:resilient, pseudonimity=:pseudonimity, data_minimization=:dataMinimization, redundancies=:redundancies, tested=:tested, data_storage=:dataStorage, storage_limited=:storageLimited, technical_measures=:technicalMeasures, processing_log=:processingLog, name=:name, contact_details=:contactDetails, personal_data_category=:personalDataCategory, data_storage_period=:dataStoragePeriod, technical_safeguards=:technicalSafeguards, recipients=:recipients WHERE model_ref=:diagramID')
+        $connection->createCommand('UPDATE model_info SET confidentiality=:confidentiality, integrity=:integrity, availability=:availability, resilient=:resilient, pseudonimity=:pseudonimity, data_minimization=:dataMinimization, redundancies=:redundancies, tested=:tested, data_storage=:dataStorage, storage_limited=:storageLimited, technical_measures=:technicalMeasures, processing_log=:processingLog, name=:name, purpose=:purpose, contact_details=:contactDetails, personal_data_category=:personalDataCategory, data_storage_period=:dataStoragePeriod, security_measures=:securityMeasures, third_countries_transfer=:thirdCountriesTransfer, recipients=:recipients WHERE model_ref=:diagramID')
             ->bindValues($params)
             ->execute();
 

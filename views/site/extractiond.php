@@ -29,17 +29,21 @@ $this->registerJsFile(
             <option value="health">Health</option>
             <option value="ethnic_origin">Ethnic origin</option>
             <option value="racial_origin">Racial origin</option>
+            <option value="political_affiliation">Political affiliation</option>
+            <option value="philosophical_beliefs">Philosophical beliefs</option>
             <option value="criminal_offense">Criminal offense</option>
             <option value="religion">Religion</option>
             <option value="trade_union_membership">Trade union membership</option>
             <option value="sexual_orientation">Sexual orientation</option>
+            <option value="sex_life">Sex life</option>
           </select>
         </div>
         <br>
-        <div class="form-group" id="purposeContainer">
-          <label for="purpose" href="#" >Select the purpose that the personal data is being collected for:</label>
-          <select class="form-control" id="purpose" name="purpose">
+        <div class="form-group" id="legalGroundContainer">
+          <label for="legalGround" href="#" >Select the legal ground under which the personal data is collected:</label>
+          <select class="form-control" id="legalGround" name="legal_ground">
             <option value="unspecified">Unspecified</option>
+            <option value="consent">Consent</option>
             <option value="contract_performance">Contract performance</option>
             <option value="controller_legal_obligation">Controller legal obligation</option>
             <option value="vital_interest_protection">Vital interest protection</option>
@@ -48,10 +52,11 @@ $this->registerJsFile(
           </select>
         <br>
         </div>
-        <div class="form-group" id="specialPurposeContainer">
-          <label for="specialPurpose" href="#" >This is a special category of personal data. Select the purpose that the personal data is being collected for:</label>
-          <select class="form-control" id="specialPurpose" name="special_purpose">
+        <div class="form-group" id="legalGroundSpecialCategoryContainer">
+          <label for="legalGroundSpecialCategory" href="#" >This is a special category of personal data. Select the legal ground under which the personal data is collected:</label>
+          <select class="form-control" id="legalGroundSpecialCategory" name="legal_ground_special_category">
             <option value="unspecified">Unspecified</option>
+            <option value="consent">Consent</option>
             <option value="employment_purpose">Employment Purpose</option>
             <option value="social_purpose">Social Purpose</option>
             <option value="vital_interest">Vital Interest</option>
@@ -82,8 +87,8 @@ $this->registerJsFile(
 	              <label class="form-check-label" for="Clear purpose">Clear purpose</label><br>
 	              <input type="checkbox" class="form-check-input" id="Unambiguous" name="unambiguous" value="true">
 	              <label class="form-check-label" for="Unambiguous">Unambiguous</label><br>
-	              <input type="checkbox" class="form-check-input" id="Requires Affirmative Action" name="requires_affirmative_action" value="true">
-	              <label class="form-check-label" for="Requires Affirmative Action">Requires Affirmative Action</label><br>
+	              <input type="checkbox" class="form-check-input" id="Affirmative Action" name="affirmative_action" value="true">
+	              <label class="form-check-label" for="Affirmative Action">Affirmative Action</label><br>
 	              <input type="checkbox" class="form-check-input" id="Specific" name="specific" value="true">
 	              <label class="form-check-label" for="Specific">Specific</label><br>
 	              <input type="checkbox" class="form-check-input" id="Distinguishable" name="distinguishable" value="true">
@@ -95,7 +100,7 @@ $this->registerJsFile(
 	          </div>
 	     </div>
 	     <div id="consentNotRequired">
-	     	Due to the selected purpose of processing, consent is not required.
+	     	Due to the selected legal ground of processing, consent is not required.
 	     </div>
           <br>
         <div class="form-group">

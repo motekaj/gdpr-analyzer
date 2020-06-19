@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 06, 2020 at 10:51 AM
--- Server version: 5.7.29-0ubuntu0.18.04.1
--- PHP Version: 7.2.24-0ubuntu0.18.04.3
+-- Generation Time: Jun 18, 2020 at 01:23 PM
+-- Server version: 5.7.30-0ubuntu0.18.04.1
+-- PHP Version: 7.2.24-0ubuntu0.18.04.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -31,14 +31,6 @@ CREATE TABLE `bpmn_models` (
   `filename` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `bpmn_models`
---
-
-INSERT INTO `bpmn_models` (`id`, `filename`) VALUES
-(27, 'tollgate_b_bpmnio.bpmn'),
-(31, 'AVP Part2.bpmn');
-
 -- --------------------------------------------------------
 
 --
@@ -56,8 +48,8 @@ CREATE TABLE `model_info` (
   `personal_data` text,
   `processing_task` text,
   `data_category` text,
-  `purpose` text,
-  `special_purpose` text,
+  `legal_ground` text,
+  `legal_ground_special_category` text,
   `consent` text,
   `clear_purpose` text,
   `unambiguous` text,
@@ -79,20 +71,14 @@ CREATE TABLE `model_info` (
   `technical_measures` text,
   `processing_log` text,
   `name` text,
+  `purpose` text,
   `contact_details` text,
   `personal_data_category` text,
   `data_storage_period` text,
-  `technical_safeguards` text,
+  `security_measures` text,
+  `third_countries_transfer` text,
   `recipients` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `model_info`
---
-
-INSERT INTO `model_info` (`id`, `data_subject`, `controller`, `processor`, `recipient`, `third_party`, `model_ref`, `personal_data`, `processing_task`, `data_category`, `purpose`, `special_purpose`, `consent`, `clear_purpose`, `unambiguous`, `affirmative_action`, `distinguishable`, `specific`, `withdrawable`, `freely_given`, `confidentiality`, `integrity`, `availability`, `resilient`, `pseudonimity`, `data_minimization`, `redundancies`, `tested`, `data_storage`, `storage_limited`, `technical_measures`, `processing_log`, `name`, `contact_details`, `personal_data_category`, `data_storage_period`, `technical_safeguards`, `recipients`) VALUES
-(19, 'Car', 'Tollgate', NULL, 'Bank', NULL, 27, 'Payment info ', 'Request_payment', 'general', 'general', 'general', 'false', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL),
-(24, 'AV', 'PSP', NULL, NULL, NULL, 31, 'Parking service credential', '7._Request_parking', 'general', 'controller_legal_obligation', 'general', 'false', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -121,12 +107,12 @@ ALTER TABLE `model_info`
 -- AUTO_INCREMENT for table `bpmn_models`
 --
 ALTER TABLE `bpmn_models`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 --
 -- AUTO_INCREMENT for table `model_info`
 --
 ALTER TABLE `model_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

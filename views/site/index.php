@@ -5,7 +5,6 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-
 $this->title = 'dpoe 0.2';
 
 function encodep($text) {
@@ -66,7 +65,7 @@ function encode64($c) {
 }
 
 $output = ('class ProcessingTask <<ProcessingTask>> {
-  logged : bool
+  recorded: bool
 }
 
 class FilingSystem {
@@ -89,8 +88,9 @@ class TechnicalMeasures {
   technologies: Array
 }
 
-class SpecialPurpose {
+class LegalGroundSpecialCategory {
  unspecified: bool
+ consent: bool
  employment_purpose: bool
  social_purpose: bool
  vital_interest: bool
@@ -105,8 +105,9 @@ class SpecialPurpose {
  statistical_purposes: bool
 }
 
-class Purpose {
+class LegalGround {
   unspecified: bool
+  consent: bool
   contract_performance: bool
   controller_legal_obligation: bool
   vital_interest_protection: bool
@@ -118,14 +119,10 @@ class PersonalData <<PersonalData>> {
   category: DATA_CATEGORY
 }
 
-class Consent {
-}
-
 class Controller <<Controller>> {
 }
 
 class DataSubject <<DataSubject>> {
-  minor : false  
 }
 
 class DataHandler {
@@ -140,16 +137,18 @@ class ThirdParty <<ThirdParty>> {
 class Processor <<Processor>> {
 }
 
-class ProcessingLog <<Artifact>> {
+class RecordOfProcessing <<Artifact>> {
   name: bool
+  purpose: bool
   contact_details: bool
   personal_data_category: bool
   data_storage_period: bool
-  technical_safeguards: bool
+  security_measures: bool
+  third_countries_transfer: bool
   recipients: bool
 }
   
-class ConsentAgreement <<Artifact>> {
+class Consent <<Artifact>> {
   clear_purpose: bool
   unambiguous: bool
   affirmative_action: bool
@@ -162,14 +161,17 @@ class ConsentAgreement <<Artifact>> {
 enum DATA_CATEGORY {
   general
   biometric
+  genetic
   health 
   ethnic_origin
   racial_origin
   political_affiliation
+  philosophical_beliefs
   criminal_offense
   religion
   trade_union_membership
   sexual_orientation
+  sex_life
 }
 
 
@@ -185,14 +187,13 @@ skinparam class {
 }
 
 
-PersonalData -- Consent : requires >
+PersonalData -- Consent : manifests >
 DataSubject -- PersonalData : provides >
 Controller -- ProcessingSystem : implements >
 Controller -- Processor : authorizes >
-Consent -- ConsentAgreement : manifests >
-ProcessingTask -- ProcessingLog : manifests >
-PersonalData -- SpecialPurpose
-Purpose -- Consent
+ProcessingTask -- RecordOfProcessing : manifests >
+PersonalData -- LegalGroundSpecialCategory : requires >
+PersonalData -- LegalGround : requires >
 Controller --|> DataHandler
 Processor --|> DataHandler
 Recipient --|> DataHandler
@@ -204,6 +205,7 @@ TechnicalMeasures -- ProcessingSystem : secures >
 ');
 
 $encode = encodep($output);
+
 ?>
 
 <!-- Page Heading -->
