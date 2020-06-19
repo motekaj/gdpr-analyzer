@@ -360,8 +360,10 @@ $encode = encodep($output);
   	<div class="col-lg-12 mb-4">
 	    <div class="card shadow mb-4">
 	        <div class="card-header py-3">
-	          <h6 class="m-0 font-weight-bold text-primary">Instantiated GDPR Model</h6>
+	          <h6 class="m-0 font-weight-bold text-primary float-left">Instantiated GDPR Model</h6>
+	        <?= Html::a('Download PlantUML', ['/site/puml', 'output' => $output], ['class'=>'btn btn-primary float-right']) ?>
 	        </div>
+
 	        <div class="card-body">
 	          <img style="max-width: 100%;" src=<?php echo "http://www.plantuml.com/plantuml/img/{$encode}"; ?>>
 	        </div>

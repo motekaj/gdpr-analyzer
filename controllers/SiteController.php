@@ -233,4 +233,10 @@ class SiteController extends Controller
 
     }
 
+    public function actionPuml($output) {
+        header("Content-type: text/plain");
+        header("Content-Disposition: attachment; filename=plantuml.txt");
+        echo $output;
+    }
+
 }
