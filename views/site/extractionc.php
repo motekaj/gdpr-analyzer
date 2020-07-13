@@ -22,7 +22,7 @@ use yii\bootstrap\Dropdown;
         <?php
         foreach ($processingTasks as $key => $value) {
         echo '<div class="form-check">
-                <input class="form-check-input" type="radio" value="' . preg_replace('/\s+/', '_', $value) . '" id="' . $value . '" name="processingTask">
+                <input class="form-check-input" type="radio" value="' . preg_replace('/\s+/', '_', $value) . '" id="' . $value . '" name="processingTask" required>
                 <label class="form-check-label" for="' . $value . '">
                   <strong>' . $value . '</strong>
                 </label>

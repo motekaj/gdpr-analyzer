@@ -40,10 +40,13 @@ class BPMNParser extends Component
 
         foreach ($inputDataObjectRefs as $key => $value) {
             $dataObjectName = $xml->xpath('//bpmn:dataObjectReference[@id=' . '"' . $value[0] . '"' . ']');
-            $dataObjectName = (array) $dataObjectName[0];
-            $dataObjectName = $dataObjectName['@attributes']['name'];
 
-            array_push($dataObjectNames, $dataObjectName);
+            if ($dataObjectName) {
+                $dataObjectName = (array) $dataObjectName[0];
+                $dataObjectName = $dataObjectName['@attributes']['name'];
+
+                array_push($dataObjectNames, $dataObjectName);
+            }
         }
 
         return $dataObjectNames;
