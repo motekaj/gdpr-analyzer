@@ -19,7 +19,7 @@ class DiagramController extends Controller
         ];
     }
 
-	public function actionAll() 
+	public function actionAll()
 	{
 		$diagram = new BPMNDiagram;
 		$diagramNames = $diagram->getFilenames();
@@ -28,12 +28,12 @@ class DiagramController extends Controller
 		return $this->render('all', ['diagramNames' => $diagramNames, 'diagramIDs' => $diagramIDs]);
 	}
 
-	public function actionGetList() 
+	public function actionGetList()
 	{
 
 	}
 
-	public function actionDelete($diagramID) 
+	public function actionDelete($diagramID)
 	{
 		$connection = Yii::$app->db;
         $connection->createCommand('DELETE FROM bpmn_models WHERE id=:diagramID')
@@ -44,6 +44,12 @@ class DiagramController extends Controller
         ->execute();
 
         return $this->redirect('all');
-	}
+    }
+    public function actionView($diagramName) {
+        $xml = file_get_contents('uploads/' . $diagramName);
+        $xml = str_replace("\n", '', $xml);
+        return $this  -> render('view', ['xml' => $xml]);
+        
+    }
 
 }
