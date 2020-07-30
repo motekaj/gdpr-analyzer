@@ -46,4 +46,10 @@ class DiagramController extends Controller
         return $this->redirect('all');
 	}
 
+    public function actionView($diagramName) {
+        $xml = file_get_contents('uploads/' . $diagramName);
+        $xml = str_replace("\n", '', $xml);
+        return $this  -> render('view', ['xml' => $xml]);
+    }
+
 }
