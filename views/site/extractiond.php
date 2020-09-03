@@ -97,8 +97,48 @@ $this->registerJsFile(
 	              <label class="form-check-label" for="Withdrawable">Withdrawable</label><br>
 	              <input type="checkbox" class="form-check-input" id="Freely Given" name="freely_given" value="true">
 	              <label class="form-check-label" for="Freely Given">Freely Given</label><br>
+                <br>
 	          </div>
 	     </div>
+       <div id="privacyPolicyWrapper">
+          <div class="form-group">
+              <label for="privacyPolicy" href="#" >Is required information provided to the data subject prior to data collection (eg. in the Privacy policy) ?</label>
+            <select class="form-control" id="privacyPolicy" name="privacy_policy">
+              <option value="false">No</option>
+              <option value="true">Yes</option>
+            </select>
+          </div>
+        <!-- <div class="form-group"> -->
+            <div class="form-check" id="privacyPolicyAttributes">
+            <p>Select the informational attributes of the privacy policy:</p>
+                <input type="checkbox" class="form-check-input" id="Controller contact info" name="controller_contact_info" value="true">
+                <label class="form-check-label" for="Controller contact info">Controller contact info</label><br>
+                <input type="checkbox" class="form-check-input" id="DPO contact info" name="dpo_contact_info" value="true">
+                <label class="form-check-label" for="DPO contact info">DPO contact info</label><br>
+                <input type="checkbox" class="form-check-input" id="Purpose of processing" name="purpose_of_processing" value="true">
+                <label class="form-check-label" for="Purpose of processing">Purpose of processing</label><br>
+                <input type="checkbox" class="form-check-input" id="Legal basis" name="legal_basis" value="true">
+                <label class="form-check-label" for="Legal basis">Legal basis</label><br>
+                <input type="checkbox" class="form-check-input" id="Data recipients" name="data_recipients" value="true">
+                <label class="form-check-label" for="Data recipients">Data recipients</label><br>
+                <input type="checkbox" class="form-check-input" id="Storage period" name="storage_period" value="true">
+                <label class="form-check-label" for="Storage period">Storage period</label><br>
+                <input type="checkbox" class="form-check-input" id="Right to access" name="right_to_access" value="true">
+                <label class="form-check-label" for="Right to access">Right to access</label><br>
+                <input type="checkbox" class="form-check-input" id="Right to rectify" name="right_to_rectify" value="true">
+                <label class="form-check-label" for="Right to rectify">Right to rectify</label><br>
+                <input type="checkbox" class="form-check-input" id="Right to erasure" name="right_to_erasure" value="true">
+                <label class="form-check-label" for="Right to erasure">Right to erasure</label><br>
+                <input type="checkbox" class="form-check-input" id="Right to portability" name="right_to_portability" value="true">
+                <label class="form-check-label" for="Right to portability">Right to portability</label><br>
+                <input type="checkbox" class="form-check-input" id="Right to withdraw consent" name="right_to_withdraw_consent" value="true">
+                <label class="form-check-label" for="Right to withdraw consent">Right to withdraw consent</label><br>
+                <input type="checkbox" class="form-check-input" id="Right to lodge complaint" name="right_to_lodge_complaint" value="true">
+                <label class="form-check-label" for="Right to lodge complaint">Right to lodge complaint</label><br>
+                <input type="checkbox" class="form-check-input" id="Automated decision making" name="automated_decision_making" value="true">
+                <label class="form-check-label" for="Automated decision making">Automated decision making</label><br>
+            </div>
+       </div>
 	     <div id="consentNotRequired">
 	     	Due to the selected legal ground of processing, consent is not required.
 	     </div>

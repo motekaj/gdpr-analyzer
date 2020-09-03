@@ -169,6 +169,7 @@ class SiteController extends Controller
         $params[':legalGround']        = $formd['legal_ground'];
         $params[':legalGroundSpecialCategory'] = $formd['legal_ground_special_category'];
         $params[':consent']        = $formd['consent'];
+        $params[':privacyPolicy']        = $formd['privacy_policy'];
 
         if (array_key_exists('clear_purpose', $formd)) {$params[':clearPurpose'] = $formd['clear_purpose'];} else { $params[':clearPurpose'] = null;};
         if (array_key_exists('unambiguous', $formd)) {$params[':unambiguous'] = $formd['unambiguous'];} else { $params[':unambiguous'] = null;};
@@ -177,11 +178,24 @@ class SiteController extends Controller
         if (array_key_exists('specific', $formd)) {$params[':specific'] = $formd['specific'];} else { $params[':specific'] = null;};
         if (array_key_exists('withdrawable', $formd)) {$params[':withdrawable'] = $formd['withdrawable'];} else { $params[':withdrawable'] = null;};
         if (array_key_exists('freely_given', $formd)) {$params[':freelyGiven'] = $formd['freely_given'];} else { $params[':freelyGiven'] = null;};
+        if (array_key_exists('controller_contact_info', $formd)) {$params[':controllerContactInfo'] = $formd['controller_contact_info'];} else { $params[':controllerContactInfo'] = null;};
+        if (array_key_exists('dpo_contact_info', $formd)) {$params[':dpoContactInfo'] = $formd['dpo_contact_info'];} else { $params[':dpoContactInfo'] = null;};
+        if (array_key_exists('purpose_of_processing', $formd)) {$params[':purposeOfProcessing'] = $formd['purpose_of_processing'];} else { $params[':purposeOfProcessing'] = null;};
+        if (array_key_exists('legal_basis', $formd)) {$params[':legalBasis'] = $formd['legal_basis'];} else { $params[':legalBasis'] = null;};
+        if (array_key_exists('data_recipients', $formd)) {$params[':dataRecipients'] = $formd['data_recipients'];} else { $params[':dataRecipients'] = null;};
+        if (array_key_exists('storage_period', $formd)) {$params[':storagePeriod'] = $formd['storage_period'];} else { $params[':storagePeriod'] = null;};
+        if (array_key_exists('right_to_access', $formd)) {$params[':rightToAccess'] = $formd['right_to_access'];} else { $params[':rightToAccess'] = null;};
+        if (array_key_exists('right_to_rectify', $formd)) {$params[':rightToRectify'] = $formd['right_to_rectify'];} else { $params[':rightToRectify'] = null;};
+        if (array_key_exists('right_to_erasure', $formd)) {$params[':rightToErasure'] = $formd['right_to_erasure'];} else { $params[':rightToErasure'] = null;};
+        if (array_key_exists('right_to_portability', $formd)) {$params[':rightToPortability'] = $formd['right_to_portability'];} else { $params[':rightToPortability'] = null;};
+        if (array_key_exists('right_to_withdraw_consent', $formd)) {$params[':rightToWithdrawConsent'] = $formd['right_to_withdraw_consent'];} else { $params[':rightToWithdrawConsent'] = null;};
+        if (array_key_exists('right_to_lodge_complaint', $formd)) {$params[':rightToLodgeComplaint'] = $formd['right_to_lodge_complaint'];} else { $params[':rightToLodgeComplaint'] = null;};
+        if (array_key_exists('automated_decision_making', $formd)) {$params[':automatedDecisionMaking'] = $formd['automated_decision_making'];} else { $params[':automatedDecisionMaking'] = null;};
 
         $params[':diagramID'] = $diagramID;
 
         $connection = Yii::$app->db;
-        $connection->createCommand('UPDATE model_info SET data_category=:dataCategory, legal_ground=:legalGround, legal_ground_special_category=:legalGroundSpecialCategory, consent=:consent, clear_purpose=:clearPurpose, unambiguous=:unambiguous, affirmative_action=:affirmativeAction, distinguishable=:distinguishable, `specific`=:specific, withdrawable=:withdrawable, freely_given=:freelyGiven WHERE model_ref=:diagramID')
+        $connection->createCommand('UPDATE model_info SET data_category=:dataCategory, legal_ground=:legalGround, legal_ground_special_category=:legalGroundSpecialCategory, consent=:consent, clear_purpose=:clearPurpose, unambiguous=:unambiguous, affirmative_action=:affirmativeAction, distinguishable=:distinguishable, `specific`=:specific, withdrawable=:withdrawable, freely_given=:freelyGiven, privacy_policy=:privacyPolicy, controller_contact_info=:controllerContactInfo, dpo_contact_info=:dpoContactInfo, purpose_of_processing=:purposeOfProcessing, legal_basis=:legalBasis, data_recipients=:dataRecipients, storage_period=:storagePeriod, right_to_access=:rightToAccess, right_to_rectify=:rightToRectify, right_to_erasure=:rightToErasure, right_to_portability=:rightToPortability, right_to_withdraw_consent=:rightToWithdrawConsent, right_to_lodge_complaint=:rightToLodgeComplaint, automated_decision_making=:automatedDecisionMaking WHERE model_ref=:diagramID')
             ->bindValues($params)
             ->execute();
 
@@ -208,7 +222,8 @@ class SiteController extends Controller
         if (array_key_exists('tested', $forme)) {$params[':tested'] = $forme['tested'];} else { $params[':tested'] = null;};
         if (array_key_exists('data_storage', $forme)) {$params[':dataStorage'] = $forme['data_storage'];} else { $params[':dataStorage'] = null;};
         if (array_key_exists('storage_limited', $forme)) {$params[':storageLimited'] = $forme['storage_limited'];} else { $params[':storageLimited'] = null;};
-        if (array_key_exists('technical_measures', $forme)) {$params[':technicalMeasures'] = implode(',', $forme['technical_measures']);if ($params[':technicalMeasures'] == "None") {$params[':technicalMeasures'] = null;}} else { $params[':technicalMeasures'] = null;};
+        if (array_key_exists('technologies', $forme)) {$params[':technologies'] = implode(',', $forme['technologies']);if ($params[':technologies'] == "None") {$params[':technologies'] = null;}} else { $params[':technologies'] = null;};
+        if (array_key_exists('isms_standard', $forme)) {$params[':ismsStandard'] = $forme['isms_standard'];} else { $params[':ismsStandard'] = null;};
         if (array_key_exists('processing_log', $forme)) {$params[':processingLog'] = $forme['processing_log'];} else { $params[':processingLog'] = null;};
         if (array_key_exists('name', $forme)) {$params[':name'] = $forme['name'];} else { $params[':name'] = null;};
         if (array_key_exists('purpose', $forme)) {$params[':purpose'] = $forme['purpose'];} else { $params[':purpose'] = null;};
@@ -221,7 +236,7 @@ class SiteController extends Controller
         $params[':diagramID'] = $diagramID;
 
         $connection = Yii::$app->db;
-        $connection->createCommand('UPDATE model_info SET confidentiality=:confidentiality, integrity=:integrity, availability=:availability, resilient=:resilient, pseudonimity=:pseudonimity, data_minimization=:dataMinimization, redundancies=:redundancies, tested=:tested, data_storage=:dataStorage, storage_limited=:storageLimited, technical_measures=:technicalMeasures, processing_log=:processingLog, name=:name, purpose=:purpose, contact_details=:contactDetails, personal_data_category=:personalDataCategory, data_storage_period=:dataStoragePeriod, security_measures=:securityMeasures, third_countries_transfer=:thirdCountriesTransfer, recipients=:recipients WHERE model_ref=:diagramID')
+        $connection->createCommand('UPDATE model_info SET confidentiality=:confidentiality, integrity=:integrity, availability=:availability, resilient=:resilient, pseudonimity=:pseudonimity, data_minimization=:dataMinimization, redundancies=:redundancies, tested=:tested, data_storage=:dataStorage, storage_limited=:storageLimited, technologies=:technologies, isms_standard=:ismsStandard, processing_log=:processingLog, name=:name, purpose=:purpose, contact_details=:contactDetails, personal_data_category=:personalDataCategory, data_storage_period=:dataStoragePeriod, security_measures=:securityMeasures, third_countries_transfer=:thirdCountriesTransfer, recipients=:recipients WHERE model_ref=:diagramID')
             ->bindValues($params)
             ->execute();
 

@@ -50,7 +50,7 @@ $this->registerJsFile(
         <br>
         <div class="form-group">
           <label for="dataCategory" href="#" >If there are specific technologies implemented to secure the processing and/or filing system, select them below:</label>
-          <select multiple size="6" class="form-control" id="technicalMeasures" name="technical_measures[]">
+          <select multiple size="6" class="form-control" id="technologies" name="technologies[]">
             <option value="None">None</option>
             <option value="TLS Encryption">TLS Encryption</option>
             <option value="IPSec Encryption">IPSec Encryption</option>
@@ -67,6 +67,14 @@ $this->registerJsFile(
           </select>
         </div>
         <br>
+
+        <div class="form-group">
+            <label for="ismsStandard" href="#" >Does the controller implement organizational measures such as adherence to a security/privacy standard (eg. ISO27701)? </label>
+          <select class="form-control" id="ismsStandard" name="isms_standard">
+            <option value="">No</option>
+            <option value="true">Yes</option>
+          </select>
+        </div>
 
         <div class="form-group">
             <label for="processingLog" href="#" >Is a record of processing maintained?</label>

@@ -52,4 +52,9 @@ class DiagramController extends Controller
         return $this  -> render('view', ['xml' => $xml]);
     }
 
+    public function actionEdit($diagramName) {
+        $xml = file_get_contents('uploads/' . $diagramName);
+        $xml = str_replace("\n", '', $xml);
+        return $this  -> render('edit', ['xml' => $xml]);
+    }
 }

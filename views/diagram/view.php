@@ -10,6 +10,8 @@ use yii\bootstrap\Dropdown;
 ?>
 
     <script src="https://unpkg.com/bpmn-js@7.2.1/dist/bpmn-navigated-viewer.development.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/bpmn-js@7.3.0/dist/assets/diagram-js.css" />
+	<link rel="stylesheet" href="https://unpkg.com/bpmn-js@7.3.0/dist/assets/bpmn-font/css/bpmn.css" />
 
 
     <!-- example styles -->
@@ -39,25 +41,36 @@ use yii\bootstrap\Dropdown;
   .needs-discussion:not(.djs-connection) .djs-visual > :nth-child(1) {
     stroke: rgba(66, 180, 21, 0.7) !important; /* color elements as red */
   }
+
+  .buttons {
+  	list-style: none;
+  	padding-left: 0;
+  }
+
+  .buttons li {
+  	display: inline;
+  }
 </style>
 <div id="canvas"></div>
 
 <script language="JavaScript">
 	var diagram = '<?php echo $xml ?>';
 
-	var bpmnJS = new BpmnJS({
+	var modeler = new BpmnJS({
 		container: '#canvas'
   	});
 	try {
 
-	bpmnJS.importXML(diagram);
+	modeler.importXML(diagram);
 
 	console.log('success!');
-	  viewer.get('canvas').zoom('fit-viewport');
+	  // viewer.get('canvas').zoom('fit-viewport');
 	} catch (err) {
 
 	console.error('something went wrong:', err);
 	}
+
+	
 </script>
 
 

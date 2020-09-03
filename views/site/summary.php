@@ -183,6 +183,60 @@ if (($data['data_category'] !== "general" && $data['legal_ground_special_categor
 	}
 }
 
+$privacyPolicy = "";
+
+if($data['privacy_policy'] == "false") {
+		$errors = $errors . "\n note top of PrivacyPolicy #salmon: Privacy policy is missing [Art. 13,14]\n";
+		$privacyPolicy = "class PrivacyPolicy <<MissingArtifact>> {
+			controller_contact_info
+			dpo_contact_info
+			purpose_of_processing
+			legal_basis
+			data_recipients
+			storage_period
+			right_to_access
+			right_to_rectify
+			right_to_erasure
+			right_to_portability
+			right_to_withdraw_consent
+			right_to_lodge_complaint
+			automated_decision_making
+		}";
+	} else {
+		$privacyPolicy = "class PrivacyPolicy <<Artifact>> { \n" .
+		  "controller_contact_info: " . $data['controller_contact_info'] . "\n" . 
+		  "dpo_contact_info: " . $data['dpo_contact_info'] . "\n" . 
+		  "purpose_of_processing: " . $data['purpose_of_processing'] . "\n" . 
+		  "legal_basis: " . $data['legal_basis'] . "\n" . 
+		  "data_recipients: " . $data['data_recipients'] . "\n" . 
+		  "storage_period: " . $data['storage_period'] . "\n" . 
+		  "right_to_access: " . $data['right_to_access'] . "\n" . 
+		  "right_to_rectify: " . $data['right_to_rectify'] . "\n" . 
+		  "right_to_erasure: " . $data['right_to_erasure'] . "\n" . 
+		  "right_to_portability: " . $data['right_to_portability'] . "\n" . 
+		  "right_to_withdraw_consent: " . $data['right_to_withdraw_consent'] . "\n" . 
+		  "right_to_lodge_complaint: " . $data['right_to_lodge_complaint'] . "\n" . 
+		  "automated_decision_making: " . $data['automated_decision_making'] . "\n" . 
+		"}";
+
+		if($data['controller_contact_info'] !== "true" ||
+			$data['dpo_contact_info'] !== "true" ||
+			$data['purpose_of_processing'] !== "true" ||
+			$data['legal_basis'] !== "true" ||
+			$data['data_recipients'] !== "true" ||
+			$data['storage_period'] !== "true" ||
+			$data['right_to_access'] !== "true" ||
+			$data['right_to_rectify'] !== "true" ||
+			$data['right_to_erasure'] !== "true" ||
+			$data['right_to_portability'] !== "true" ||
+			$data['right_to_withdraw_consent'] !== "true" ||
+			$data['right_to_lodge_complaint'] !== "true" ||
+			$data['automated_decision_making'] !== "true") {
+			$errors = $errors . "\n note top of PrivacyPolicy #salmon: Privacy policy has missing attributes [Art. 13,14]\n";
+		}
+	}
+
+
 $filingSystem = "";
 
 if($data['data_storage'] !== "true") {
@@ -199,17 +253,20 @@ if($data['data_storage'] !== "true") {
   	}
 }
 
-$technicalMeasures = "";
+$securityMeasures = "";
 
-if($data['technical_measures'] == NULL) {
-	$technicalMeasures = "class TechnicalMeasures <<MissingClass>> {
+if($data['technologies'] == NULL && $data['isms_standard'] == NULL) {
+	$securityMeasures = "class SecurityMeasures <<MissingClass>> {
   		technologies:
+  		isms_standard:
 	}";
 
-	$errors = $errors . "\n note top of TechnicalMeasures #salmon: No technical measures present [Art. 25] \n";
+	$errors = $errors . "\n note top of SecurityMeasures #salmon: No security measures present [Art. 25] \n";
 } else {
-	$technicalMeasures = "class TechnicalMeasures {
-  		technologies: " . $data['technical_measures'] . "\n }";
+	$securityMeasures = "class SecurityMeasures { \n" . 
+  		"technologies: " . $data['technologies'] . "\n" .
+  		"isms_standard: " . $data['isms_standard'] . "\n" .
+	   "}";
 };
 
 
@@ -287,6 +344,7 @@ if ($data['processing_log'] !== "true") {
 }
 
 $associations = "PersonalData -- Consent : manifests >
+PersonalData -- PrivacyPolicy : manifests >
 DataSubject -- PersonalData : provides >
 Controller -- ProcessingSystem : implements >
 Controller -- Processor : authorizes >
@@ -300,7 +358,7 @@ ThirdParty --|> DataHandler
 DataHandler -- PersonalData : receives >
 ProcessingSystem -- ProcessingTask : performs >
 FilingSystem --|> ProcessingSystem
-TechnicalMeasures -- ProcessingSystem : secures >";
+SecurityMeasures -- ProcessingSystem : secures >";
 
 
 $associations = str_replace("Controller", str_replace(' ', '', $data['controller']), $associations);
@@ -332,8 +390,9 @@ $output = $controller .
 "\n" . $legalGroundSpecialCategory  . 
 "\n" . $legalGround  . 
 "\n" . $consent  .  
+"\n" . $privacyPolicy  .  
 "\n" . $filingSystem  . 
-"\n" . $technicalMeasures  . 
+"\n" . $securityMeasures  . 
 "\n" . $processingSystem  . 
 "\n" . $processingTask  . 
 "\n" . $processingLog  . 

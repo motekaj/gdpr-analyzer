@@ -84,8 +84,9 @@ class ProcessingSystem {
   tested: bool
 }
 
-class TechnicalMeasures {
+class SecurityMeasures {
   technologies: Array
+  isms_standard: bool
 }
 
 class LegalGroundSpecialCategory {
@@ -158,6 +159,22 @@ class Consent <<Artifact>> {
   freely_given: bool
 }
 
+class PrivacyPolicy <<Artifact>> {
+  controller_contact_info: bool
+  dpo_contact_info: bool
+  purpose_of_processing: bool
+  legal_basis: bool
+  data_recipients: bool
+  storage_period: bool
+  right_to_access: bool
+  right_to_rectify: bool
+  right_to_erasure: bool
+  right_to_portability: bool
+  right_to_withdraw_consent: bool
+  right_to_lodge_complaint: bool
+  automated_decision_making: bool
+}
+
 enum DATA_CATEGORY {
   general
   biometric
@@ -188,6 +205,7 @@ skinparam class {
 
 
 PersonalData -- Consent : manifests >
+PersonalData -- PrivacyPolicy : manifests >
 DataSubject -- PersonalData : provides >
 Controller -- ProcessingSystem : implements >
 Controller -- Processor : authorizes >
@@ -201,7 +219,7 @@ ThirdParty --|> DataHandler
 DataHandler -- PersonalData : receives >
 ProcessingSystem -- ProcessingTask : performs >
 FilingSystem --|> ProcessingSystem
-TechnicalMeasures -- ProcessingSystem : secures >
+SecurityMeasures -- ProcessingSystem : secures >
 ');
 
 $encode = encodep($output);

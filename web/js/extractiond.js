@@ -1,5 +1,7 @@
 var dataCategory = $('#dataCategory');
 var consent = $('#consent');
+var privacyPolicy = $('#privacyPolicy');
+var privacyPolicyAttributes = $('#privacyPolicyAttributes');
 var consentAgreement = $('#consentAgreement');
 var legalGround = $('#legalGround');
 var legalGroundSpecialCategory = $('#legalGroundSpecialCategory');
@@ -7,6 +9,7 @@ var legalGroundSpecialCategory = $('#legalGroundSpecialCategory');
 $('#legalGroundSpecialCategoryContainer').hide();
 $('#consentNotRequired').hide();
 consentAgreement.hide();
+privacyPolicyAttributes.hide();
 
 dataCategory.change(function() {
     if ($(this).val() == 'general') {
@@ -23,6 +26,14 @@ consent.change(function() {
         consentAgreement.show();
     } else {
         consentAgreement.hide();
+    }
+});
+
+privacyPolicy.change(function() {
+    if ($(this).val() == 'true') {
+        privacyPolicyAttributes.show();
+    } else {
+        privacyPolicyAttributes.hide();
     }
 });
 
