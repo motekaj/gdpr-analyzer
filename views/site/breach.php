@@ -98,6 +98,12 @@ class DataSubjectNotification <<Artifact>> {
   measures_taken: bool
 }
 
+class InternalDataBreachRecord <<Artifact>> {
+  data_breach_facts: bool
+  data_breach_effects: bool
+  remedial_action_taken: bool
+}
+
 skinparam class {
   BackgroundColor<<Artifact>> PaleGreen
   BorderColor<<Artifact>> SpringGreen
@@ -112,7 +118,8 @@ skinparam class {
 DataSubject --|> DataBreach
 PersonalData --|> DataBreach
 DataBreach -- SupervisoryAuthorityNotification : manifests >
-DataBreach -- DataSubjectNotification : manifests >');
+DataBreach -- DataSubjectNotification : manifests >
+DataBreach -- InternalDataBreachRecord : manifests >');
 
 $encode = encodep($output);
 ?>
