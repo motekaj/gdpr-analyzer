@@ -125,7 +125,7 @@ if($data['data_category'] == "general") {
 
 $legalGround = "";
 
-if($data['legal_ground'] == "unspecified") {
+if($data['legal_ground'] == "unspecified" || $data['legal_ground'] == "") {
 	$legalGround = "class LegalGround {
 	  unspecified: true
 	  consent: false
@@ -149,7 +149,7 @@ if (($data['data_category'] !== "general" && $data['legal_ground_special_categor
 	$data['legal_ground'] == "legitimate_interest")) {
 	$consent = "class Consent <<NotRequired>> {}";
 } else {
-	if($data['consent'] == "false") {
+	if($data['consent'] == "false" || $data['consent'] == "") {
 		$errors = $errors . "\n note top of Consent #salmon: Consent is missing [Art. 7]\n";
 		$consent = "class Consent <<MissingArtifact>> {
 		  clear_purpose: 
@@ -185,7 +185,7 @@ if (($data['data_category'] !== "general" && $data['legal_ground_special_categor
 
 $privacyPolicy = "";
 
-if($data['privacy_policy'] == "false") {
+if($data['privacy_policy'] == "false" || $data['privacy_policy'] == "") {
 		$errors = $errors . "\n note top of PrivacyPolicy #salmon: Privacy policy is missing [Art. 13,14]\n";
 		$privacyPolicy = "class PrivacyPolicy <<MissingArtifact>> {
 			controller_contact_info
@@ -307,7 +307,7 @@ if ($data['processing_log'] !== "true") {
 
 $processingLog = "";
 
-if ($data['processing_log'] !== "true") {
+if ($data['processing_log'] !== "true" || $data['processing_log'] == "") {
 	$processingLog = "class RecordOfProcessing <<MissingArtifact>> {
 		name: 
 		purpose:
@@ -403,7 +403,7 @@ $output = $controller .
 $encode = encodep($output);
 
 // echo '<pre>';
-// print_r($data);
+// print_r(htmlentities($output));
 // echo '</pre>';
 // die();
 

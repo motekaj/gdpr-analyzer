@@ -49,6 +49,12 @@ SbadminAsset::register($this);
     </li>
 
     <li class="nav-item">
+      <a class="nav-link" href="<?= Url::to(['site/gdprbpmn']) ?>">
+        <i class="fas fa-fw fa-play"></i>
+        <span>GDPR-BPMN Analyzer</span></a>
+    </li>
+
+    <li class="nav-item">
       <a class="nav-link" href="<?= Url::to(['site/dpia']) ?>">
         <i class="fas fa-fw fa-play"></i>
         <span>DPIA</span></a>

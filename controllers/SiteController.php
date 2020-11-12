@@ -43,6 +43,46 @@ class SiteController extends Controller
         return $this->render('index', ['model' => $model]);
     }
 
+    public function actionGdprbpmn()
+    {
+
+        $model = new BPMNDiagram();
+        
+
+        if (Yii::$app->request->isPost) {
+            $model->file = UploadedFile::getInstance($model, 'file');
+            $diagramID   = $model->upload();
+
+            $connection = Yii::$app->db;
+
+            $filename = $connection->createCommand('SELECT filename FROM bpmn_models WHERE id=:id')
+                ->bindValue(':id', $diagramID['id'])
+                ->queryOne();
+
+            $xml = simplexml_load_file('uploads/' . $filename['filename']);
+
+
+            if ($diagramID) {
+                $data = Yii::$app->BPMNParser->parseGdprbpmn($xml);
+
+                // return $this->render('gdprbpmnsummary', ['data' => $data, 'diagramID' => $diagramID]);
+                return $this->redirect(['gdprbpmnsummary', 'diagramName' => $filename['filename'], 'diagramID' => $diagramID['id']]);
+            }
+        }
+        return $this->render('gdprbpmn', ['model' => $model]);
+    }
+
+    public function actionGdprbpmnsummary($diagramName, $diagramID)
+    {
+
+        $xml = simplexml_load_file('uploads/' . $diagramName);
+        // print_r($xml);
+        // die();
+        $data = Yii::$app->BPMNParser->parseGdprbpmn($xml);
+
+        return $this->render('gdprbpmnsummary', ['data' => $data, 'diagramID' => $diagramID]);
+    }
+
     public function actionDpia()
     {
         return $this->render('dpia');
@@ -253,5 +293,6 @@ class SiteController extends Controller
         header("Content-Disposition: attachment; filename=plantuml.txt");
         return $output;
     }
+
 
 }

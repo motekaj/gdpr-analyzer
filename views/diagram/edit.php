@@ -63,6 +63,8 @@ use yii\bootstrap\Dropdown;
 	    Download SVG image
 	  </a>
 	</li>
+	<p></p>
+	<p>Note: You must make at least one edit to download the model.</p>
 </ul>
 <div id="canvas"></div>
 
