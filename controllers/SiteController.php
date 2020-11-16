@@ -65,7 +65,6 @@ class SiteController extends Controller
             if ($diagramID) {
                 $data = Yii::$app->BPMNParser->parseGdprbpmn($xml);
 
-                // return $this->render('gdprbpmnsummary', ['data' => $data, 'diagramID' => $diagramID]);
                 return $this->redirect(['gdprbpmnsummary', 'diagramName' => $filename['filename'], 'diagramID' => $diagramID['id']]);
             }
         }

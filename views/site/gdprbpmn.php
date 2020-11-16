@@ -7,8 +7,6 @@ use yii\widgets\ActiveForm;
 
 $this->title = 'dpoe 0.2';
 
-$this->registerMetaTag(['http-equiv' => 'Content-Security-Policy','content' =>"form-action 'self' http://dpotool.cs.ut.ee"]);
-
 ?>
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -37,9 +35,6 @@ $this->registerMetaTag(['http-equiv' => 'Content-Security-Policy','content' =>"f
               <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Upload</div>
                 <br>
                 <?php $form = ActiveForm::begin([
-                    'action' => [
-                        'site/gdprbpmn'
-                    ],
                     'options' => [
                         'enctype' => 'multipart/form-data'
                     ]
