@@ -7,6 +7,8 @@ use yii\widgets\ActiveForm;
 
 $this->title = 'dpoe 0.2';
 
+$this->registerMetaTag(['http-equiv' => 'Content-Security-Policy','content' =>""]);
+
 function encodep($text) {
    $data = utf8_encode($text);
    $compressed = gzdeflate($data, 9);

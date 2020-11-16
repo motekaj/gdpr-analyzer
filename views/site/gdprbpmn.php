@@ -7,8 +7,9 @@ use yii\widgets\ActiveForm;
 
 $this->title = 'dpoe 0.2';
 
-?>
+$this->registerMetaTag(['http-equiv' => 'Content-Security-Policy','content' =>""]);
 
+?>
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
   <h1 class="h3 mb-0 text-gray-800">GDPR-BPMN Analyzer</h1>
