@@ -36,6 +36,9 @@ $this->title = 'dpoe 0.2';
               <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Upload</div>
                 <br>
                 <?php $form = ActiveForm::begin([
+                    'action' => [
+                        'site/gdprbpmn'
+                    ],
                     'options' => [
                         'enctype' => 'multipart/form-data'
                     ]
