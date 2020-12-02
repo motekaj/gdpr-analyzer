@@ -400,12 +400,10 @@ $output = $controller .
 "\n" . $skinparams .
 "\n" . $errors;
 
-$encode = encodep($output);
+$output = preg_replace('/\[[A-Z]+\]/i', "",$output);
+$output = preg_replace('/_\[processing_task\]_/i', "",$output);
 
-// echo '<pre>';
-// print_r($data);
-// echo '</pre>';
-// die();
+$encode = encodep($output);
 
 // echo '<pre>';
 // print_r($data);

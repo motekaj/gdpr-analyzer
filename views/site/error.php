@@ -6,6 +6,7 @@
 /* @var $exception Exception */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 $this->title = $name;
 ?>
@@ -21,7 +22,7 @@ $this->title = $name;
         The above error occurred while the Web server was processing your request.
     </p>
     <p>
-        Please contact us if you think this is a server error. Thank you.
+        If you were analyzing a GDPR-BPMN model, please verify that the syntax of your model conforms to the <strong><a href="<?= Url::to(['site/gdprbpmn']) ?>">syntax rules</a></strong>.
     </p>
 
 </div>

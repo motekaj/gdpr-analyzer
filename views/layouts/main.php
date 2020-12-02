@@ -24,6 +24,15 @@ SbadminAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
+<style>
+  .sidebar {
+    width: 15rem !important;
+  }
+
+  .sidebar .nav-item .nav-link {
+    width: 15rem !important;
+  }
+</style>
 <body id="page-top">
 <?php $this->beginBody() ?>
 
@@ -31,7 +40,7 @@ SbadminAsset::register($this);
 
   <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= Url::to(['site/index']) ?>">
       <div class="sidebar-brand-icon rotate-n-15">
         <i class="fas fa-shield-alt"></i>
       </div>
@@ -43,16 +52,17 @@ SbadminAsset::register($this);
     </div>
 
     <li class="nav-item">
-      <a class="nav-link" href="<?= Url::to(['site/index']) ?>">
-        <i class="fas fa-fw fa-play"></i>
-        <span>Evaluate Business Process</span></a>
-    </li>
-
-    <li class="nav-item">
-      <a class="nav-link" href="<?= Url::to(['site/gdprbpmn']) ?>">
-        <i class="fas fa-fw fa-play"></i>
-        <span>GDPR-BPMN Analyzer</span></a>
-    </li>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fas fa-fw fa-play"></i>
+          <span>Evaluate Business Process</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="<?= Url::to(['site/index']) ?>">BPMN 2.0 Analyzer</a>
+            <a class="collapse-item" href="<?= Url::to(['site/gdprbpmn']) ?>">GDPR-BPMN Analyzer</a>
+          </div>
+        </div>
+      </li>
 
     <li class="nav-item">
       <a class="nav-link" href="<?= Url::to(['site/dpia']) ?>">

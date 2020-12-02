@@ -22,6 +22,14 @@ class SiteController extends Controller
         ];
     }
 
+    public function actionError()
+    {
+        $exception = Yii::$app->errorHandler->exception;
+        if ($exception !== null) {
+            return $this->render('error', ['exception' => $exception]);
+        }
+    }
+
     /**
      * Displays homepage.
      *
@@ -48,7 +56,6 @@ class SiteController extends Controller
 
         $model = new BPMNDiagram();
         
-
         if (Yii::$app->request->isPost) {
             $model->file = UploadedFile::getInstance($model, 'file');
             $diagramID   = $model->upload();
@@ -61,13 +68,14 @@ class SiteController extends Controller
 
             $xml = simplexml_load_file('uploads/' . $filename['filename']);
 
-
             if ($diagramID) {
                 $data = Yii::$app->BPMNParser->parseGdprbpmn($xml);
+                $exception = Yii::$app->errorHandler->exception;
 
                 return $this->redirect(['gdprbpmnsummary', 'diagramName' => $filename['filename'], 'diagramID' => $diagramID['id']]);
             }
-        }
+        } 
+
         return $this->render('gdprbpmn', ['model' => $model]);
     }
 
